@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanaka's Resume</title>
+    <!-- Tailwind CSS CDN for utility classes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-900 text-gray-100 font-inter">
+    <!-- Main Container -->
+    <div class="flex flex-col lg:flex-row min-h-screen">
+        <!-- Sidebar Navigation -->
+        <aside class="w-full lg:w-1/4 bg-gray-800 p-8 flex flex-col items-center lg:items-start shadow-lg rounded-br-lg lg:rounded-bl-none lg:rounded-tr-none rounded-tl-lg lg:rounded-bl-lg">
+            <div class="mb-8 text-center lg:text-left">
+                <img src="https://placehold.co/150x150/333333/FFFFFF?text=TP" alt="Tanaka Profile" class="rounded-full w-32 h-32 object-cover mb-4 border-4 border-green-500 transform transition-transform duration-300 hover:scale-105">
+                <h1 class="text-3xl font-bold text-white mb-2">Tanaka P.</h1>
+                <p class="text-lg text-gray-400">Environmental Geo-informatician</p>
+            </div>
+            
+            <nav class="w-full">
+                <ul class="space-y-4">
+                    <li><a href="#about" class="nav-link flex items-center p-3 rounded-lg text-gray-300 hover:bg-green-700 hover:text-white transition duration-300 transform hover:translate-x-1">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                        About
+                    </a></li>
+                    <li><a href="#work-history" class="nav-link flex items-center p-3 rounded-lg text-gray-300 hover:bg-green-700 hover:text-white transition duration-300 transform hover:translate-x-1">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-1.309-8.43-3.255m16.86-1.547A23.931 23.931 0 0012 9c-3.183 0-6.22-1.309-8.43-3.255M2 8l.764-1.298a2 2 0 012.714-.995L12 9l6.522-3.293a2 2 0 012.714.995L22 8m-6 6h.01M16 18h.01"></path></svg>
+                        Work History
+                    </a></li>
+                    <li><a href="#education" class="nav-link flex items-center p-3 rounded-lg text-gray-300 hover:bg-green-700 hover:text-white transition duration-300 transform hover:translate-x-1">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                        Education
+                    </a></li>
+                    <li><a href="#skills" class="nav-link flex items-center p-3 rounded-lg text-gray-300 hover:bg-green-700 hover:text-white transition duration-300 transform hover:translate-x-1">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 21h.01M19 10H5a2 2 0 00-2 2v5a2 2 0 002 2h14a2 2 0 002-2v-5a2 2 0 00-2-2zm0 0V9a2 2 0 00-2-2h-2.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 009.172 3H7.5A2 2 0 005 5v4m3 0h8"></path></svg>
+                        Skills
+                    </a></li>
+                    <li><a href="#research" class="nav-link flex items-center p-3 rounded-lg text-gray-300 hover:bg-green-700 hover:text-white transition duration-300 transform hover:translate-x-1">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                        Research
+                    </a></li>
+                    <li><a href="#contact" class="nav-link flex items-center p-3 rounded-lg text-gray-300 hover:bg-green-700 hover:text-white transition duration-300 transform hover:translate-x-1">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-4 4v7a1 1 0 01-1 1H8a1 1 0 01-1-1v-7m4-2a2 2 0 00-2 2v4a2 2 0 002 2h2a2 2 0 002-2v-4a2 2 0 00-2-2h-2z"></path></svg>
+                        Contact
+                    </a></li>
+                </ul>
+            </nav>
+
+            <div class="mt-8 w-full text-center lg:text-left">
+                <a href="Tanaka CV.docx" download class="inline-flex items-center justify-center bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:scale-105">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    Download CV
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 p-8 lg:p-12 animate-fade-in">
+            <!-- About Section -->
+            <section id="about" class="mb-12 p-8 bg-gray-800 rounded-lg shadow-xl animate-item">
+                <h2 class="text-4xl font-bold text-green-500 mb-6 border-b-2 border-green-700 pb-3">About Me</h2>
+                <p class="text-lg leading-relaxed text-gray-300">
+                    I am a self-motivated and ambitious young man with a Bachelor's Degree in Environmental Conservation and Geo-informatics, complemented by hands-on experience in surveying and GIS applications. With over two years of practical experience in the mining industry, I have developed strong skills in data collection, analysis, and implementing GIS techniques to address environmental and safety challenges. My background includes assisting in achieving ISO recognition through effective environmental management practices. I am eager to leverage my knowledge and skills in a local authority or government set-up, contributing to sustainable development and effective geospatial solutions.
+                </p>
+            </section>
+
+            <!-- Work History Section -->
+            <section id="work-history" class="mb-12 p-8 bg-gray-800 rounded-lg shadow-xl animate-item">
+                <h2 class="text-4xl font-bold text-green-500 mb-6 border-b-2 border-green-700 pb-3">Work History</h2>
+                <div class="space-y-8">
+                    <!-- Role 1 -->
+                    <div class="bg-gray-700 p-6 rounded-lg shadow-md border-l-4 border-green-500">
+                        <h3 class="text-2xl font-semibold text-white">Surveyor Assistant <span class="text-gray-400">@ Muriel Mine</span></h3>
+                        <p class="text-gray-400 text-sm mt-1">October 2017 - August 2019</p>
+                        <ul class="list-disc list-inside text-gray-300 mt-4 space-y-2">
+                            <li>Used GPS and Leica GS18 GNNSS Machine to locate dilapidated beacons and perform tasks like hole plotting, coordinate collection, and general mine outline shaping.</li>
+                            <li>Designed mine premises using AutoCAD and Data Mine software.</li>
+                        </ul>
+                    </div>
+                    <!-- Role 2 -->
+                    <div class="bg-gray-700 p-6 rounded-lg shadow-md border-l-4 border-green-500">
+                        <h3 class="text-2xl font-semibold text-white">Safety Health and Environment, Technical Services and Surveying Intern <span class="text-gray-400">@ Muriel Mine</span></h3>
+                        <p class="text-gray-400 text-sm mt-1">August 2021 - June 2022</p>
+                        <ul class="list-disc list-inside text-gray-300 mt-4 space-y-2">
+                            <li>Contributed to ISO recognition by implementing ISO 1400 and 14001 in various departments.</li>
+                            <li>Implemented GIS and surveying techniques for safety, health, and environmental issues.</li>
+                            <li>Performed data analysis of surveying data and developed new methods for ISO 14000 implementation.</li>
+                        </ul>
+                    </div>
+                    <!-- Role 3 -->
+                    <div class="bg-gray-700 p-6 rounded-lg shadow-md border-l-4 border-green-500">
+                        <h3 class="text-2xl font-semibold text-white">Self Employed</h3>
+                        <p class="text-gray-400 text-sm mt-1">December 2023 - Present</p>
+                        <ul class="list-disc list-inside text-gray-300 mt-4 space-y-2">
+                            <li>Engaged in writing and editing undergraduate dissertation for publication, collaborating with co-authors on revisions.</li>
+                            <li>Addressing feedback and corrections to strengthen submission; aiming for highest standards before publication.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Education Section -->
+            <section id="education" class="mb-12 p-8 bg-gray-800 rounded-lg shadow-xl animate-item">
+                <h2 class="text-4xl font-bold text-green-500 mb-6 border-b-2 border-green-700 pb-3">Education</h2>
+                <div class="space-y-8">
+                    <div class="bg-gray-700 p-6 rounded-lg shadow-md border-l-4 border-green-500">
+                        <h3 class="text-2xl font-semibold text-white">Bachelor of Science in Environmental Conservation and Geo-informatics</h3>
+                        <p class="text-gray-400 text-sm mt-1">Chinhoyi University of Technology, Zimbabwe (January 2019 - December 2023)</p>
+                        <ul class="list-disc list-inside text-gray-300 mt-4 space-y-2">
+                            <li>Degree Class: 2.1</li>
+                            <li>GPA: 2.5</li>
+                            <li>Thesis Title: Urban Expansion on Water Service Delivery in Mutare.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-700 p-6 rounded-lg shadow-md border-l-4 border-green-500">
+                        <h3 class="text-2xl font-semibold text-white">Advanced Level</h3>
+                        <p class="text-gray-400 text-sm mt-1">First Class Academy (2017-2018)</p>
+                        <ul class="list-disc list-inside text-gray-300 mt-4 space-y-2">
+                            <li>2 A Level Passes, including Geography</li>
+                            <li>Award: Best Geography Student 2017</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-700 p-6 rounded-lg shadow-md border-l-4 border-green-500">
+                        <h3 class="text-2xl font-semibold text-white">Ordinary Level</h3>
+                        <p class="text-gray-400 text-sm mt-1">Mutare Boys High School (2012-2016)</p>
+                        <ul class="list-disc list-inside text-gray-300 mt-4 space-y-2">
+                            <li>5 Ordinary Level passes</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section id="skills" class="mb-12 p-8 bg-gray-800 rounded-lg shadow-xl animate-item">
+                <h2 class="text-4xl font-bold text-green-500 mb-6 border-b-2 border-green-700 pb-3">Skills</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-gray-700 p-4 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-white mb-2">Core Competencies</h3>
+                        <ul class="list-disc list-inside text-gray-300 space-y-1">
+                            <li>Data Analysis and Visual Presentation</li>
+                            <li>GIS Techniques</li>
+                            <li>Project Formulation and Implementation</li>
+                            <li>Research</li>
+                            <li>Presentation (Canva, Publisher, PowerPoint)</li>
+                            <li>Content Creation</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-white mb-2">Software & Tools</h3>
+                        <ul class="list-disc list-inside text-gray-300 space-y-1">
+                            <li>Microsoft Suite (Including MS Access)</li>
+                            <li>Google Earth Engine</li>
+                            <li>Python Coding (Minimal Knowledge)</li>
+                            <li>SPSS Statistical Package</li>
+                            <li>ArcGIS and QGIS (Map Creation)</li>
+                            <li>AutoCAD and Data Mine</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-white mb-2">Technical Skills</h3>
+                        <ul class="list-disc list-inside text-gray-300 space-y-1">
+                            <li>Data Collection and Analysis</li>
+                            <li>Surveying</li>
+                            <li>Spatial Data Analysis</li>
+                            <li>Modelling</li>
+                            <li>Report Writing</li>
+                            <li>ISO 1400 & 14001 Implementation</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Research Interests Section -->
+            <section id="research" class="mb-12 p-8 bg-gray-800 rounded-lg shadow-xl animate-item">
+                <h2 class="text-4xl font-bold text-green-500 mb-6 border-b-2 border-green-700 pb-3">Research Interests</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-300 leading-relaxed">
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>Geo-informatics application in Hydrology, Urban Planning, Rural Development</li>
+                        <li>Implementation of Geo-informatics in solving environmental issues</li>
+                        <li>Environmental Degradation</li>
+                        <li>Hydrological Modelling using GIS software</li>
+                    </ul>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>Indigenous Knowledge Systems</li>
+                        <li>Land-use and Land-cover Change</li>
+                        <li>Climate Change and Weather Phenomenons</li>
+                        <li>Implementation of GIS in Mining Activities</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="mb-12 p-8 bg-gray-800 rounded-lg shadow-xl animate-item">
+                <h2 class="text-4xl font-bold text-green-500 mb-6 border-b-2 border-green-700 pb-3">Contact</h2>
+                <div class="text-lg text-gray-300 space-y-4">
+                    <p>I am eager to connect and discuss how my skills can contribute to your organization. Please feel free to reach out:</p>
+                    <p class="flex items-center">
+                        <svg class="w-6 h-6 mr-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-4 4v7a1 1 0 01-1 1H8a1 1 0 01-1-1v-7"></path></svg>
+                        Email: <a href="mailto:your.email@example.com" class="text-green-400 hover:underline">your.email@example.com</a> (Please replace with your actual email)
+                    </p>
+                    <p class="flex items-center">
+                        <svg class="w-6 h-6 mr-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                        Phone: <span class="text-green-400">+263 7X XXX XXXX</span> (Please replace with your actual phone number)
+                    </p>
+                    <p class="mt-4 text-gray-400">References available upon request.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- JavaScript for Animations -->
+    <script src="script.js"></script>
+</body>
+</html>

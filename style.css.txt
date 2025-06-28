@@ -1,0 +1,98 @@
+/* style.css */
+
+/* Custom properties for colors (optional, but good practice) */
+:root {
+    --primary-green: #10B981; /* Tailwind green-500 */
+    --dark-bg: #111827;      /* Tailwind gray-900 */
+    --dark-card: #1F2937;    /* Tailwind gray-800 */
+    --darker-card: #374151;  /* Tailwind gray-700 */
+    --light-text: #E5E7EB;   /* Tailwind gray-100 */
+    --light-gray: #9CA3AF;   /* Tailwind gray-400 */
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    /* This background creates a subtle, animated gradient effect */
+    background: linear-gradient(135deg, var(--dark-bg), #0f172a, #111827);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Base styles for animations */
+.animate-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.animate-item.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Optional: Initial page fade-in effect */
+main {
+    opacity: 0;
+    animation: fadeInPage 1s ease-out forwards;
+}
+
+@keyframes fadeInPage {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Profile image hover effect */
+.aside img {
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.5); /* Subtle glow */
+}
+
+/* Navigation link hover effect */
+.nav-link {
+    /* Transitions already handled by Tailwind classes in HTML */
+}
+
+/* Scrollbar styling (optional, for better aesthetics on webkit browsers) */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark-bg);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-green);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0d9263; /* A slightly darker green on hover */
+}
+
+/* Adjust padding/margin for smaller screens */
+@media (max-width: 1023px) {
+    .lg\:w-1\/4 {
+        width: 100%; /* Sidebar takes full width on small screens */
+        padding: 2rem;
+        border-radius: 0.5rem; /* Rounded corners for overall card effect */
+        margin-bottom: 2rem;
+    }
+
+    .lg\:items-start {
+        align-items: center; /* Center items in sidebar on small screens */
+    }
+
+    .lg\:rounded-bl-none {
+        border-bottom-left-radius: 0.5rem; /* Re-apply border-radius for consistency */
+    }
+    .lg\:rounded-tr-none {
+        border-top-right-radius: 0.5rem;
+    }
+}
