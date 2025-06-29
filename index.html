@@ -153,6 +153,8 @@
                         <i class="fas fa-flask w-5 h-5 mr-2"></i> Research Interests</a></li>
                     <li><a href="#contact" class="nav-link flex items-center p-2.5 rounded-lg text-text-muted hover:bg-deep-teal hover:text-text-light transition duration-300 transform hover:translate-x-1 animate-fade-in-left delay-900">
                         <i class="fas fa-envelope w-5 h-5 mr-2"></i> Contact</a></li>
+                    <li><a href="#webgl-mountain" class="nav-link flex items-center p-2.5 rounded-lg text-text-muted hover:bg-deep-teal hover:text-text-light transition duration-300 transform hover:translate-x-1 animate-fade-in-left delay-1000">
+                        <i class="fas fa-mountain w-5 h-5 mr-2"></i> WebGL Landscape</a></li>
                 </ul>
             </nav>
             <div class="mt-6 w-full text-center lg:text-left">
@@ -574,6 +576,62 @@
                     </div>
                 </div>
                 <p class="mt-4 text-neutral-grey italic text-sm" data-aos="fade-up" data-aos-delay="300">References available upon request.</p>
+            </section>
+
+            <!-- WebGL Mountain Landscape Section -->
+            <section id="webgl-mountain" class="mb-8 p-6 rounded-lg shadow-xl transition-colors duration-300 glass-card" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-fresh-green mb-4 border-b-2 border-deep-teal pb-2">WebGL Realistic Mountain Landscape</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Left Panel: Project Details -->
+                    <div class="md:col-span-1 space-y-4">
+                        <div>
+                            <h3 class="text-xl font-semibold text-accent-text mb-2">Project Overview</h3>
+                            <p class="text-text-muted text-sm leading-relaxed">
+                                This project aims to create a stunning, photorealistic 3D mountain landscape as a WebGL background for a website using Three.js. The scene will feature multiple mountain ranges, atmospheric effects, and dynamic lighting to create an immersive, cinematic experience.
+                            </p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-sky-blue mb-1.5">Core Requirements:</h4>
+                            <ul class="list-disc list-inside text-text-muted text-xs space-y-1">
+                                <li>Procedural terrain generation (Perlin/Simplex noise)</li>
+                                <li>Multiple mountain layers with varying heights and distances</li>
+                                <li>Realistic mountain silhouettes</li>
+                                <li>LOD (Level of Detail) system</li>
+                                <li>Terrain texturing (rock, snow, vegetation)</li>
+                                <li>Dynamic sun positioning (day/night cycle)</li>
+                                <li>Atmospheric scattering (sky colors)</li>
+                                <li>Volumetric fog/haze</li>
+                                <li>God rays/sunbeams</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-sky-blue mb-1.5">Technology Stack:</h4>
+                            <ul class="list-disc list-inside text-text-muted text-xs space-y-1">
+                                <li>Three.js (latest version)</li>
+                                <li>GLSL shaders</li>
+                                <li>Noise libraries (e.g., SimplexNoise.js)</li>
+                            </ul>
+                        </div>
+                         <div>
+                            <h4 class="text-lg font-semibold text-sky-blue mb-1.5">Interactive Elements:</h4>
+                            <ul class="list-disc list-inside text-text-muted text-xs space-y-1">
+                                <li>Subtle camera movement (auto-rotation or mouse-follow)</li>
+                                <li>Zoom capabilities for detailed mountain exploration</li>
+                                <li>Weather transitions (clear → cloudy → foggy)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel: WebGL Canvas Placeholder -->
+                    <div class="md:col-span-2 bg-dark-card p-4 rounded-lg shadow-inner flex items-center justify-center min-h-[300px] lg:min-h-[400px] border border-deep-teal" id="webgl-canvas-container">
+                        <p class="text-neutral-grey text-lg">WebGL Canvas Will Be Here</p>
+                        <!-- Canvas will be added here by Three.js -->
+                    </div>
+                </div>
+                <div class="mt-6 text-text-muted text-sm">
+                    <h3 class="text-xl font-semibold text-accent-text mb-2">Implementation Notes</h3>
+                    <p>The landscape will be procedurally generated to ensure uniqueness and performance. Advanced features like atmospheric scattering, dynamic lighting, and LOD will be implemented to achieve realism and smooth frame rates. The goal is a visually captivating background that enhances user experience without hindering website performance.</p>
+                </div>
             </section>
         </main>
     </div>
