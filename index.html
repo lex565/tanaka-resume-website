@@ -9,6 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- AOS CSS for animations -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="style.css">
     <style>
         /* Custom Tailwind Colors & Variables */
@@ -27,6 +29,14 @@
             --color-text-muted: #D1D5DB; /* Muted Text */
             --color-accent-text: #E5E7EB; /* For headers/strong text */
 
+            /* Light Mode Colors */
+            --color-light-bg: #F3F4F6; /* Light Background */
+            --color-light-card: #FFFFFF; /* Light Card */
+            --color-text-dark: #1F2937; /* Dark Text */
+            --color-text-muted-light: #4B5563; /* Muted Text for Light Mode */
+            --color-accent-text-light: #111827; /* Accent Text for Light Mode */
+
+
             /* More vibrant accent colors based on initial palette */
             --color-accent-1: #FFD700; /* Gold */
             --color-accent-2: #FF6347; /* Tomato */
@@ -34,6 +44,11 @@
             --color-accent-4: #00CED1; /* DarkTurquoise */
             --color-accent-5: #FF4500; /* OrangeRed */
             --color-accent-6: #1E90FF; /* DodgerBlue */
+
+            /* RGB versions for opacity in CSS box-shadows */
+            --color-fresh-green-rgb: 108, 187, 60;
+            --color-sky-blue-rgb: 135, 206, 235;
+            --color-deep-teal-rgb: 0, 128, 128;
         }
 
         /* Utility classes for custom colors */
@@ -90,20 +105,37 @@
         .bg-accent-6 { background-color: var(--color-accent-6); }
         .text-accent-6 { color: var(--color-accent-6); }
         .border-accent-6 { border-color: var(--color-accent-6); }
+
+        /* Light mode styles */
+        html.light .bg-dark-bg { background-color: var(--color-light-bg); }
+        html.light .bg-dark-card { background-color: var(--color-light-card); }
+        html.light .text-text-light { color: var(--color-text-dark); }
+        html.light .text-text-muted { color: var(--color-text-muted-light); }
+        html.light .text-accent-text { color: var(--color-accent-text-light); }
+        html.light .nav-link.text-text-muted { color: var(--color-text-muted-light);}
+        html.light .nav-link:hover { background-color: var(--color-deep-teal); color: var(--color-text-light); }
+        html.light .border-deep-teal { border-color: var(--color-neutral-grey);}
+        html.light .text-neutral-grey { color: var(--color-text-muted-light)}
+        html.light .timeline-dot { border-color: var(--color-light-bg); }
+        html.light .timeline-dot i { color: var(--color-light-bg); }
+        html.light .bg-dark-bg.px-3.py-1 { background-color: var(--color-light-bg); } /* For trusted by tags */
+        html.light .research-tag.bg-accent-1 { color: var(--color-light-bg); background-color: var(--color-accent-1);} /* Ensure contrast for specific tags */
+
+
     </style>
 </head>
-<body class="bg-dark-bg text-text-light font-inter">
+<body class="bg-dark-bg text-text-light font-inter transition-colors duration-300">
     <!-- Main Container -->
     <div class="flex flex-col lg:flex-row min-h-screen">
         <!-- Sidebar Navigation -->
-        <aside class="w-full lg:w-1/4 bg-dark-card p-8 flex flex-col items-center lg:items-start shadow-lg rounded-br-lg lg:rounded-bl-none lg:rounded-tr-none rounded-tl-lg lg:rounded-bl-lg">
+        <aside class="w-full lg:w-1/4 bg-dark-card p-8 flex flex-col items-center lg:items-start shadow-lg rounded-br-lg lg:rounded-bl-none lg:rounded-tr-none rounded-tl-lg lg:rounded-bl-lg transition-colors duration-300">
             <div class="mb-8 text-center lg:text-left">
                 <!-- Placeholder image for now, user can replace with their image -->
                 <img src="https://placehold.co/150x150/008080/FFFFFF?text=TM" alt="Tanaka Profile" class="rounded-full w-32 h-32 object-cover mb-4 border-4 border-fresh-green transform transition-transform duration-300 hover:scale-105 animate-fade-in-down">
                 <h1 class="text-3xl font-bold text-accent-text mb-2 animate-fade-in-left">Tanaka Alex Mbendana</h1>
                 <p class="text-lg text-neutral-grey animate-fade-in-right">Environmentalist | Geo-informatician</p>
             </div>
-            
+
             <nav class="w-full">
                 <ul class="space-y-4">
                     <li><a href="#about" class="nav-link flex items-center p-3 rounded-lg text-text-muted hover:bg-deep-teal hover:text-text-light transition duration-300 transform hover:translate-x-1 animate-fade-in-left delay-100">
@@ -151,133 +183,167 @@
                     Download CV
                 </a>
             </div>
+
+            <!-- Dark Mode Toggle -->
+            <div class="mt-auto pt-8 text-center lg:text-left"> <!-- 'mt-auto' pushes it to the bottom -->
+                <button id="darkModeToggle" class="flex items-center p-3 rounded-lg text-text-muted hover:bg-deep-teal hover:text-text-light transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-fresh-green">
+                    <i id="darkModeIcon" class="fas fa-moon w-5 h-5 mr-3"></i>
+                    <span id="darkModeToggleText">Dark Mode</span>
+                </button>
+            </div>
         </aside>
 
         <!-- Main Content Area -->
-        <main class="flex-1 p-8 lg:p-12 animate-fade-in">
+        <main class="flex-1 p-8 lg:p-12 animate-fade-in transition-colors duration-300">
             <!-- Hero Section mimicking screenshot -->
-            <section id="hero" class="mb-12 p-8 bg-dark-card rounded-lg shadow-xl flex flex-col md:flex-row items-center md:items-start animate-item">
-                <div class="md:w-3/4">
-                    <h2 class="text-4xl lg:text-5xl font-extrabold text-fresh-green mb-4 leading-tight animate-fade-in-down-fast">Tanaka Alex Mbendana</h2>
-                    <p class="text-xl lg:text-2xl text-sky-blue mb-6 animate-fade-in-right-fast">Environmentalist & Geo-informatician</p>
-                    <p class="text-lg text-text-muted mb-8 animate-fade-in-left-fast">
+            <section id="hero" class="relative mb-12 p-8 bg-dark-card rounded-lg shadow-xl flex flex-col md:flex-row items-center md:items-start animate-item transition-colors duration-300 overflow-hidden" data-aos="fade-up">
+                <div id="parallax-bg-hero" class="absolute inset-0 bg-deep-teal opacity-20" style="transform: translateY(0px);"></div> <!-- Parallax Background Element -->
+                <div class="relative z-10 md:w-3/4"> {/* Ensure content is above parallax bg */}
+                    <h2 class="text-4xl lg:text-5xl font-extrabold text-fresh-green mb-4 leading-tight" data-aos="fade-down" data-aos-delay="100">Tanaka Alex Mbendana</h2>
+                    <p class="text-xl lg:text-2xl text-sky-blue mb-6" data-aos="fade-right" data-aos-delay="200">Environmentalist & Geo-informatician</p>
+                    <p class="text-lg text-text-muted mb-8" data-aos="fade-left" data-aos-delay="300">
                         A self-motivated and ambitious individual with a Bachelor’s Degree in Environmental Conservation and Geo-informatics, coupled with hands-on experience in surveying and GIS applications. I deliver innovative solutions that drive efficiency and positive impact, committed to making meaningful contributions to projects aligning with environmental stewardship and technological innovation.
                     </p>
-                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
-                        <a href="#work-experience" class="inline-flex items-center justify-center bg-sky-blue hover:bg-deep-teal text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 transform hover:-translate-y-1 hover:scale-105 animate-zoom-in">
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mb-8" data-aos="zoom-in" data-aos-delay="400">
+                        <a href="#work-experience" class="inline-flex items-center justify-center bg-sky-blue hover:bg-deep-teal text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 transform hover:-translate-y-1 hover:scale-105">
                             View Work <i class="fas fa-arrow-right ml-2"></i>
                         </a>
-                        <a href="#contact" class="inline-flex items-center justify-center border-2 border-fresh-green text-fresh-green hover:bg-fresh-green hover:text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 transform hover:-translate-y-1 hover:scale-105 animate-zoom-in delay-100">
+                        <a href="#contact" class="inline-flex items-center justify-center border-2 border-fresh-green text-fresh-green hover:bg-fresh-green hover:text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 transform hover:-translate-y-1 hover:scale-105">
                             Contact Me <i class="fas fa-paper-plane ml-2"></i>
                         </a>
                     </div>
-                    <div class="flex flex-wrap gap-4 text-neutral-grey text-sm items-center mt-6 animate-fade-in-up">
+                    <div class="flex flex-wrap gap-4 text-neutral-grey text-sm items-center mt-6" data-aos="fade-up" data-aos-delay="500">
                         <span class="font-semibold text-accent-text">Trusted by many:</span>
-                        <div class="flex items-center space-x-2 bg-dark-bg px-3 py-1 rounded-full border border-neutral-grey">
+                        <div class="flex items-center space-x-2 bg-dark-bg px-3 py-1 rounded-full border border-neutral-grey transition-colors duration-300">
                             <i class="fas fa-map-marked-alt text-sky-blue"></i>
                             <span>GIS Experts</span>
                         </div>
-                        <div class="flex items-center space-x-2 bg-dark-bg px-3 py-1 rounded-full border border-neutral-grey">
+                        <div class="flex items-center space-x-2 bg-dark-bg px-3 py-1 rounded-full border border-neutral-grey transition-colors duration-300">
                             <i class="fas fa-leaf text-fresh-green"></i>
                             <span>Environmental Firms</span>
                         </div>
-                        <div class="flex items-center space-x-2 bg-dark-bg px-3 py-1 rounded-full border border-neutral-grey">
+                        <div class="flex items-center space-x-2 bg-dark-bg px-3 py-1 rounded-full border border-neutral-grey transition-colors duration-300">
                             <i class="fas fa-industry text-terra-brown"></i>
                             <span>Mining Sector</span>
                         </div>
                     </div>
                 </div>
-                <div class="md:w-1/4 mt-8 md:mt-0 md:ml-8 flex justify-center items-center relative">
+                <div class="relative z-10 md:w-1/4 mt-8 md:mt-0 md:ml-8 flex justify-center items-center" data-aos="zoom-in-left" data-aos-delay="600"> {/* Ensure content is above parallax bg */}
                     <!-- This image is a placeholder for the animated person graphic from the screenshot -->
                     <img src="https://placehold.co/200x200/008080/FFFFFF?text=Graphic" alt="Animated Person Graphic" class="w-48 h-48 md:w-64 md:h-64 object-contain animate-float rounded-full">
-                    <div class="absolute top-0 right-0 p-2 bg-dark-bg rounded-full text-fresh-green text-xs font-semibold shadow-lg transform translate-x-4 -translate-y-4 animate-scale-in">
+                    <div class="absolute top-0 right-0 p-2 bg-dark-bg rounded-full text-fresh-green text-xs font-semibold shadow-lg transform translate-x-4 -translate-y-4 transition-colors duration-300" data-aos="fade-down-right" data-aos-delay="700">
                         <i class="fas fa-chart-line mr-1"></i> Impactful Solutions
                     </div>
-                    <div class="absolute bottom-0 left-0 p-2 bg-dark-bg rounded-full text-sky-blue text-xs font-semibold shadow-lg transform -translate-x-4 translate-y-4 animate-scale-in delay-100">
+                    <div class="absolute bottom-0 left-0 p-2 bg-dark-bg rounded-full text-sky-blue text-xs font-semibold shadow-lg transform -translate-x-4 translate-y-4 transition-colors duration-300" data-aos="fade-up-left" data-aos-delay="800">
                         <i class="fas fa-globe-americas mr-1"></i> Global Perspective
                     </div>
                 </div>
             </section>
 
             <!-- About Section -->
-            <section id="about" class="mb-12 p-8 bg-dark-card rounded-lg shadow-xl animate-item">
+            <section id="about" class="mb-12 p-8 rounded-lg shadow-xl transition-colors duration-300 glass-card" data-aos="fade-up">
                 <h2 class="text-3xl font-bold text-fresh-green mb-6 border-b-2 border-deep-teal pb-3">About Me</h2>
                 <div class="text-text-muted leading-relaxed text-lg">
-                    <p class="mb-4">
+                    <p class="mb-4" data-aos="fade-right" data-aos-delay="100">
                         A self-motivated and ambitious individual with a Bachelor’s Degree in Environmental Conservation and Geo-informatics, coupled with hands-on experience in surveying and GIS applications. Over the past two years, I have honed my expertise in data collection, analysis, and implementation of GIS techniques within the mining industry, addressing critical environmental and safety challenges.
                     </p>
-                    <p class="mb-4">
+                    <p class="mb-4" data-aos="fade-left" data-aos-delay="200">
                         I have played a key role in supporting organizations achieve ISO recognition by implementing effective environmental management practices, ensuring compliance with regulatory standards while promoting sustainability. My technical skills in geospatial technologies, combined with my passion for environmental conservation, enable me to deliver innovative solutions that drive efficiency and positive impact.
                     </p>
-                    <p>
+                    <p data-aos="fade-right" data-aos-delay="300">
                         I am eager to leverage my knowledge and experience in a local authority, government agency, or private sector organization, contributing to sustainable development initiatives and advancing geospatial capabilities. With a strong focus on collaboration, problem-solving, and continuous learning, I am committed to making meaningful contributions to projects that align with environmental stewardship and technological innovation.
                     </p>
                 </div>
             </section>
 
             <!-- Work Experience Section -->
-            <section id="work-experience" class="mb-12 p-8 bg-dark-card rounded-lg shadow-xl animate-item">
+            <section id="work-experience" class="mb-12 p-8 rounded-lg shadow-xl transition-colors duration-300 glass-card" data-aos="fade-up">
                 <h2 class="text-3xl font-bold text-fresh-green mb-6 border-b-2 border-deep-teal pb-3">Work Experience</h2>
                 <div class="timeline-container relative pl-8 md:pl-16">
                     <!-- Vertical Line -->
                     <div class="timeline-line absolute left-3 md:left-8 top-0 bottom-0 w-1 bg-neutral-grey rounded-full"></div>
 
                     <!-- Timeline Item 1 -->
-                    <div class="timeline-item mb-12 relative opacity-0 transform translate-y-8 animate-item-stagger">
-                        <div class="timeline-dot absolute left-0 top-0 w-6 h-6 bg-sky-blue rounded-full flex items-center justify-center -ml-2 md:-ml-5 shadow-lg border-2 border-dark-bg">
-                            <i class="fas fa-map-marker-alt text-dark-bg text-xs"></i>
+                    <div class="timeline-item mb-16 relative" data-aos="fade-up" data-aos-offset="100">
+                        <div class="timeline-dot absolute left-0 top-0 w-8 h-8 bg-sky-blue rounded-full flex items-center justify-center -ml-3 md:-ml-4 shadow-lg border-4 border-dark-bg transition-colors duration-300">
+                            <i class="fas fa-map-marker-alt text-white text-sm"></i>
                         </div>
-                        <div class="bg-dark-bg p-6 rounded-lg shadow-md border-l-4 border-sky-blue ml-6 md:ml-12 relative timeline-content">
-                            <h3 class="text-2xl font-semibold text-accent-text">Surveyor Assistant <span class="text-terra-brown">@ Muriel Mine</span></h3>
-                            <p class="text-neutral-grey text-sm mt-1">Oct 2018 - Aug 2019</p>
-                            <ul class="list-disc list-inside text-text-muted mt-4 space-y-2">
+                        <div class="ml-10 md:ml-12 p-6 rounded-lg shadow-xl border-l-4 border-sky-blue glass-card">
+                            <h3 class="text-2xl font-semibold text-accent-text mb-1">Surveyor Assistant <span class="text-terra-brown text-xl">@ Muriel Mine</span></h3>
+                            <p class="text-neutral-grey text-sm mb-3">Oct 2018 - Aug 2019</p>
+                            <ul class="list-disc list-inside text-text-muted mt-2 space-y-2 mb-4">
                                 <li>Used GPS and Leica GS18 GNSS Machine to locate dilapidated beacons and perform tasks including hole plotting, coordinate collection, and shaping the general outline of the mine.</li>
                                 <li>Designed mine premises using AutoCAD and Data Mine software.</li>
                             </ul>
+                            <div class="mt-3 pt-3 border-t border-neutral-grey border-opacity-50">
+                                <h4 class="text-sm font-semibold text-accent-text mb-2">Technologies Used:</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="tech-icon" title="AutoCAD"><i class="fas fa-drafting-compass text-sky-blue text-2xl transform transition-transform hover:scale-110"></i></span>
+                                    <span class="tech-icon" title="Data Mine Software"><i class="fas fa-cubes text-sky-blue text-2xl transform transition-transform hover:scale-110"></i></span>
+                                    <span class="tech-icon" title="GPS/GNSS"><i class="fas fa-satellite-dish text-sky-blue text-2xl transform transition-transform hover:scale-110"></i></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Timeline Item 2 -->
-                    <div class="timeline-item mb-12 relative opacity-0 transform translate-y-8 animate-item-stagger">
-                        <div class="timeline-dot absolute left-0 top-0 w-6 h-6 bg-terra-brown rounded-full flex items-center justify-center -ml-2 md:-ml-5 shadow-lg border-2 border-dark-bg">
-                            <i class="fas fa-shield-alt text-dark-bg text-xs"></i>
+                    <div class="timeline-item mb-16 relative" data-aos="fade-up" data-aos-offset="100" data-aos-delay="100">
+                        <div class="timeline-dot absolute left-0 top-0 w-8 h-8 bg-terra-brown rounded-full flex items-center justify-center -ml-3 md:-ml-4 shadow-lg border-4 border-dark-bg transition-colors duration-300">
+                            <i class="fas fa-shield-alt text-white text-sm"></i>
                         </div>
-                        <div class="bg-dark-bg p-6 rounded-lg shadow-md border-l-4 border-terra-brown ml-6 md:ml-12 relative timeline-content">
-                            <h3 class="text-2xl font-semibold text-accent-text">Safety, Health and Environment, Technical Services and Surveying Intern <span class="text-terra-brown">@ Muriel Mine</span></h3>
-                            <p class="text-neutral-grey text-sm mt-1">Aug 2021 - Jun 2022</p>
-                            <ul class="list-disc list-inside text-text-muted mt-4 space-y-2">
+                        <div class="ml-10 md:ml-12 p-6 rounded-lg shadow-xl border-l-4 border-terra-brown glass-card">
+                            <h3 class="text-2xl font-semibold text-accent-text mb-1">Safety, Health and Environment, Technical Services and Surveying Intern <span class="text-terra-brown text-xl">@ Muriel Mine</span></h3>
+                            <p class="text-neutral-grey text-sm mb-3">Aug 2021 - Jun 2022</p>
+                            <ul class="list-disc list-inside text-text-muted mt-2 space-y-2 mb-4">
                                 <li>Contributed to ISO recognition by implementing ISO 1400 and 14001 in various departments around the mine.</li>
                                 <li>Implemented GIS and surveying techniques for safety, health, and environmental issues.</li>
                                 <li>Performed Data Analysis of Surveying data collected in the field and developed new methods to implement ISO 14000.</li>
                             </ul>
+                            <div class="mt-3 pt-3 border-t border-neutral-grey border-opacity-50">
+                                <h4 class="text-sm font-semibold text-accent-text mb-2">Technologies Used:</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="tech-icon" title="GIS Software"><i class="fas fa-map-marked-alt text-terra-brown text-2xl transform transition-transform hover:scale-110"></i></span>
+                                    <span class="tech-icon" title="Surveying Equipment"><i class="fas fa-ruler-combined text-terra-brown text-2xl transform transition-transform hover:scale-110"></i></span>
+                                    <span class="tech-icon" title="ISO Standards"><i class="fas fa-certificate text-terra-brown text-2xl transform transition-transform hover:scale-110"></i></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Timeline Item 3 -->
-                    <div class="timeline-item mb-12 relative opacity-0 transform translate-y-8 animate-item-stagger">
-                        <div class="timeline-dot absolute left-0 top-0 w-6 h-6 bg-earth-green rounded-full flex items-center justify-center -ml-2 md:-ml-5 shadow-lg border-2 border-dark-bg">
-                            <i class="fas fa-briefcase text-dark-bg text-xs"></i>
+                    <div class="timeline-item mb-16 relative" data-aos="fade-up" data-aos-offset="100" data-aos-delay="200">
+                        <div class="timeline-dot absolute left-0 top-0 w-8 h-8 bg-earth-green rounded-full flex items-center justify-center -ml-3 md:-ml-4 shadow-lg border-4 border-dark-bg transition-colors duration-300">
+                            <i class="fas fa-briefcase text-white text-sm"></i>
                         </div>
-                        <div class="bg-dark-bg p-6 rounded-lg shadow-md border-l-4 border-earth-green ml-6 md:ml-12 relative timeline-content">
-                            <h3 class="text-2xl font-semibold text-accent-text">Self Employed</h3>
-                            <p class="text-neutral-grey text-sm mt-1">Dec 2023 - Present</p>
-                            <ul class="list-disc list-inside text-text-muted mt-4 space-y-2">
+                        <div class="ml-10 md:ml-12 p-6 rounded-lg shadow-xl border-l-4 border-earth-green glass-card">
+                            <h3 class="text-2xl font-semibold text-accent-text mb-1">Self Employed</h3>
+                            <p class="text-neutral-grey text-sm mb-3">Dec 2023 - Present</p>
+                            <ul class="list-disc list-inside text-text-muted mt-2 space-y-2 mb-4">
                                 <li>Developed expertise in affiliate marketing, generating passive income through strategic online techniques.</li>
                                 <li>Published a research paper based on undergraduate thesis.</li>
                                 <li>Founded CartoScholar, offering tutoring, web development, and mapping services.</li>
                                 <li>Hosts a YouTube channel, CartoScholar, sharing tips on academic performance and career development.</li>
                             </ul>
+                            <div class="mt-3 pt-3 border-t border-neutral-grey border-opacity-50">
+                                <h4 class="text-sm font-semibold text-accent-text mb-2">Key Skills/Platforms:</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="tech-icon" title="Web Development"><i class="fas fa-code text-earth-green text-2xl transform transition-transform hover:scale-110"></i></span>
+                                    <span class="tech-icon" title="Mapping Services"><i class="fas fa-map-signs text-earth-green text-2xl transform transition-transform hover:scale-110"></i></span>
+                                    <span class="tech-icon" title="YouTube Content Creation"><i class="fab fa-youtube text-earth-green text-2xl transform transition-transform hover:scale-110"></i></span>
+                                    <span class="tech-icon" title="Affiliate Marketing"><i class="fas fa-bullhorn text-earth-green text-2xl transform transition-transform hover:scale-110"></i></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
             <!-- My Work & Projects Section -->
-            <section id="my-work" class="mb-12 p-8 bg-dark-card rounded-lg shadow-xl animate-item">
+            <section id="my-work" class="mb-12 p-8 rounded-lg shadow-xl transition-colors duration-300 glass-card" data-aos="fade-up">
                 <h2 class="text-3xl font-bold text-fresh-green mb-6 border-b-2 border-deep-teal pb-3">My Work & Projects</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Project Card 1: CartoScholar Web Dev/Mapping -->
-                    <div class="project-card bg-dark-bg p-6 rounded-lg shadow-lg border-t-4 border-sky-blue transform hover:scale-105 transition-transform duration-300 animate-fade-in-up">
+                    <div class="project-card p-6 rounded-lg shadow-lg border-t-4 border-sky-blue transform hover:scale-105 transition-transform duration-300 glass-card" data-aos="fade-up-right">
                         <div class="text-sky-blue text-5xl mb-4 text-center"><i class="fas fa-globe-americas"></i></div>
                         <h3 class="text-xl font-semibold text-accent-text mb-2">CartoScholar Web/Mapping Services</h3>
                         <p class="text-text-muted text-sm mb-4">Leveraging geospatial technologies for impactful web solutions and precise mapping services.</p>
@@ -290,7 +356,7 @@
                     </div>
 
                     <!-- Project Card 2: Research & Publication -->
-                    <div class="project-card bg-dark-bg p-6 rounded-lg shadow-lg border-t-4 border-fresh-green transform hover:scale-105 transition-transform duration-300 animate-fade-in-up delay-100">
+                    <div class="project-card p-6 rounded-lg shadow-lg border-t-4 border-fresh-green transform hover:scale-105 transition-transform duration-300 glass-card" data-aos="fade-up" data-aos-delay="100">
                         <div class="text-fresh-green text-5xl mb-4 text-center"><i class="fas fa-scroll"></i></div>
                         <h3 class="text-xl font-semibold text-accent-text mb-2">Academic Research & Publications</h3>
                         <p class="text-text-muted text-sm mb-4">Contributing to scientific knowledge through rigorous research and peer-reviewed publications.</p>
@@ -303,7 +369,7 @@
                     </div>
 
                     <!-- Project Card 3: CartoScholar YouTube Channel -->
-                    <div class="project-card bg-dark-bg p-6 rounded-lg shadow-lg border-t-4 border-terra-brown transform hover:scale-105 transition-transform duration-300 animate-fade-in-up delay-200">
+                    <div class="project-card p-6 rounded-lg shadow-lg border-t-4 border-terra-brown transform hover:scale-105 transition-transform duration-300 glass-card" data-aos="fade-up-left" data-aos-delay="200">
                         <div class="text-terra-brown text-5xl mb-4 text-center"><i class="fab fa-youtube"></i></div>
                         <h3 class="text-xl font-semibold text-accent-text mb-2">CartoScholar YouTube Channel</h3>
                         <p class="text-text-muted text-sm mb-4">Sharing knowledge and insights on academic performance, career development, and geospatial topics.</p>
@@ -316,7 +382,7 @@
                     </div>
 
                     <!-- Project Card 4: Affiliate Marketing -->
-                    <div class="project-card bg-dark-bg p-6 rounded-lg shadow-lg border-t-4 border-deep-teal transform hover:scale-105 transition-transform duration-300 animate-fade-in-up delay-300">
+                    <div class="project-card p-6 rounded-lg shadow-lg border-t-4 border-deep-teal transform hover:scale-105 transition-transform duration-300 glass-card" data-aos="fade-up-right" data-aos-delay="300">
                         <div class="text-deep-teal text-5xl mb-4 text-center"><i class="fas fa-dollar-sign"></i></div>
                         <h3 class="text-xl font-semibold text-accent-text mb-2">Affiliate Marketing Initiatives</h3>
                         <p class="text-text-muted text-sm mb-4">Strategic online techniques to generate passive income and explore digital business models.</p>
@@ -331,10 +397,10 @@
             </section>
 
             <!-- Education Section -->
-            <section id="education" class="mb-12 p-8 bg-dark-card rounded-lg shadow-xl animate-item">
+            <section id="education" class="mb-12 p-8 rounded-lg shadow-xl transition-colors duration-300 glass-card" data-aos="fade-up">
                 <h2 class="text-3xl font-bold text-fresh-green mb-6 border-b-2 border-deep-teal pb-3">Education</h2>
                 <div class="space-y-8">
-                    <div class="bg-dark-bg p-6 rounded-lg shadow-md border-l-4 border-sky-blue animate-fade-in-up">
+                    <div class="p-6 rounded-lg shadow-md border-l-4 border-sky-blue glass-card" data-aos="zoom-in-up">
                         <h3 class="text-2xl font-semibold text-accent-text">Bachelor’s Degree in Environmental Conservation and Geo-informatics</h3>
                         <p class="text-neutral-grey text-sm mt-1">Chinhoyi University of Technology, Zimbabwe (August 2019 - December 2023)</p>
                         <ul class="list-disc list-inside text-text-muted mt-4 space-y-2">
@@ -342,14 +408,14 @@
                             <li>Thesis Title: Urban expansion pressure on water delivery service in Mutare</li>
                         </ul>
                     </div>
-                    <div class="bg-dark-bg p-6 rounded-lg shadow-md border-l-4 border-terra-brown animate-fade-in-up delay-100">
+                    <div class="p-6 rounded-lg shadow-md border-l-4 border-terra-brown glass-card" data-aos="zoom-in-up" data-aos-delay="100">
                         <h3 class="text-2xl font-semibold text-accent-text">Advanced Level</h3>
                         <p class="text-neutral-grey text-sm mt-1">First Class Academy (2017-2018)</p>
                         <ul class="list-disc list-inside text-text-muted mt-4 space-y-2">
                             <li>3 A level Passes</li>
                         </ul>
                     </div>
-                    <div class="bg-dark-bg p-6 rounded-lg shadow-md border-l-4 border-earth-green animate-fade-in-up delay-200">
+                    <div class="p-6 rounded-lg shadow-md border-l-4 border-earth-green glass-card" data-aos="zoom-in-up" data-aos-delay="200">
                         <h3 class="text-2xl font-semibold text-accent-text">Ordinary Level</h3>
                         <p class="text-neutral-grey text-sm mt-1">Mutare Boys High (2012-2016)</p>
                         <ul class="list-disc list-inside text-text-muted mt-4 space-y-2">
@@ -359,12 +425,12 @@
                 </div>
             </section>
 
-            <!-- Skills Section (Updated to be more like screenshot's percentage circles/skill bars) -->
-            <section id="skills" class="mb-12 p-8 bg-dark-card rounded-lg shadow-xl animate-item">
+            <!-- Skills Section -->
+            <section id="skills" class="mb-12 p-8 rounded-lg shadow-xl transition-colors duration-300 glass-card" data-aos="fade-up">
                 <h2 class="text-3xl font-bold text-fresh-green mb-6 border-b-2 border-deep-teal pb-3">Skills</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <!-- Core Competencies (Skill Bars) -->
-                    <div class="bg-dark-bg p-6 rounded-lg shadow-md border-l-4 border-sky-blue animate-fade-in-up">
+                    <div class="p-6 rounded-lg shadow-md border-l-4 border-sky-blue glass-card" data-aos="fade-right" data-aos-delay="100">
                         <h3 class="text-xl font-semibold text-accent-text mb-4">Core Competencies</h3>
                         <div class="space-y-4">
                             <div class="skill-bar">
@@ -373,7 +439,7 @@
                                     <span class="text-fresh-green font-bold">90%</span>
                                 </p>
                                 <div class="w-full bg-neutral-grey rounded-full h-2">
-                                    <div class="bg-fresh-green h-2 rounded-full skill-fill" data-progress="90"></div>
+                                    <div class="bg-fresh-green h-2 rounded-full skill-fill" data-progress="90" style="width: 0%;"></div>
                                 </div>
                             </div>
                             <div class="skill-bar">
@@ -382,7 +448,7 @@
                                     <span class="text-sky-blue font-bold">85%</span>
                                 </p>
                                 <div class="w-full bg-neutral-grey rounded-full h-2">
-                                    <div class="bg-sky-blue h-2 rounded-full skill-fill" data-progress="85"></div>
+                                    <div class="bg-sky-blue h-2 rounded-full skill-fill" data-progress="85" style="width: 0%;"></div>
                                 </div>
                             </div>
                             <div class="skill-bar">
@@ -391,7 +457,7 @@
                                     <span class="text-terra-brown font-bold">92%</span>
                                 </p>
                                 <div class="w-full bg-neutral-grey rounded-full h-2">
-                                    <div class="bg-terra-brown h-2 rounded-full skill-fill" data-progress="92"></div>
+                                    <div class="bg-terra-brown h-2 rounded-full skill-fill" data-progress="92" style="width: 0%;"></div>
                                 </div>
                             </div>
                             <div class="skill-bar">
@@ -400,55 +466,55 @@
                                     <span class="text-deep-teal font-bold">88%</span>
                                 </p>
                                 <div class="w-full bg-neutral-grey rounded-full h-2">
-                                    <div class="bg-deep-teal h-2 rounded-full skill-fill" data-progress="88"></div>
+                                    <div class="bg-deep-teal h-2 rounded-full skill-fill" data-progress="88" style="width: 0%;"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Software & Tools (Circular Progress) -->
-                    <div class="bg-dark-bg p-6 rounded-lg shadow-md border-l-4 border-terra-brown animate-fade-in-up delay-100">
+                    <div class="p-6 rounded-lg shadow-md border-l-4 border-terra-brown glass-card" data-aos="fade-up" data-aos-delay="200">
                         <h3 class="text-xl font-semibold text-accent-text mb-4">Software & Tools</h3>
                         <div class="grid grid-cols-2 gap-4 text-center">
-                            <div class="skill-circle flex flex-col items-center">
+                            <div class="skill-circle flex flex-col items-center" data-aos="zoom-in-up" data-aos-delay="50">
                                 <div class="circle-progress-wrapper relative w-24 h-24" data-progress="90" data-color="var(--color-fresh-green)">
                                     <canvas class="circle-canvas absolute top-0 left-0" width="96" height="96"></canvas>
-                                    <div class="circle-text absolute inset-0 flex items-center justify-center text-accent-text text-lg font-bold">90%</div>
+                                    <div class="circle-text absolute inset-0 flex items-center justify-center text-accent-text text-lg font-bold">0%</div>
                                 </div>
                                 <p class="text-text-muted text-sm mt-2">GIS Software</p>
                             </div>
-                            <div class="skill-circle flex flex-col items-center">
+                            <div class="skill-circle flex flex-col items-center" data-aos="zoom-in-up" data-aos-delay="100">
                                 <div class="circle-progress-wrapper relative w-24 h-24" data-progress="85" data-color="var(--color-sky-blue)">
                                     <canvas class="circle-canvas absolute top-0 left-0" width="96" height="96"></canvas>
-                                    <div class="circle-text absolute inset-0 flex items-center justify-center text-accent-text text-lg font-bold">85%</div>
+                                    <div class="circle-text absolute inset-0 flex items-center justify-center text-accent-text text-lg font-bold">0%</div>
                                 </div>
                                 <p class="text-text-muted text-sm mt-2">Google Earth Engine</p>
                             </div>
-                            <div class="skill-circle flex flex-col items-center">
+                            <div class="skill-circle flex flex-col items-center" data-aos="zoom-in-up" data-aos-delay="150">
                                 <div class="circle-progress-wrapper relative w-24 h-24" data-progress="80" data-color="var(--color-deep-teal)">
                                     <canvas class="circle-canvas absolute top-0 left-0" width="96" height="96"></canvas>
-                                    <div class="circle-text absolute inset-0 flex items-center justify-center text-accent-text text-lg font-bold">80%</div>
+                                    <div class="circle-text absolute inset-0 flex items-center justify-center text-accent-text text-lg font-bold">0%</div>
                                 </div>
                                 <p class="text-text-muted text-sm mt-2">Remote Sensing SW</p>
                             </div>
-                            <div class="skill-circle flex flex-col items-center">
+                            <div class="skill-circle flex flex-col items-center" data-aos="zoom-in-up" data-aos-delay="200">
                                 <div class="circle-progress-wrapper relative w-24 h-24" data-progress="70" data-color="var(--color-terra-brown)">
                                     <canvas class="circle-canvas absolute top-0 left-0" width="96" height="96"></canvas>
-                                    <div class="circle-text absolute inset-0 flex items-center justify-center text-accent-text text-lg font-bold">70%</div>
+                                    <div class="circle-text absolute inset-0 flex items-center justify-center text-accent-text text-lg font-bold">0%</div>
                                 </div>
                                 <p class="text-text-muted text-sm mt-2">MS Office Suite</p>
                             </div>
-                             <div class="skill-circle flex flex-col items-center">
+                             <div class="skill-circle flex flex-col items-center" data-aos="zoom-in-up" data-aos-delay="250">
                                 <div class="circle-progress-wrapper relative w-24 h-24" data-progress="60" data-color="var(--color-earth-green)">
                                     <canvas class="circle-canvas absolute top-0 left-0" width="96" height="96"></canvas>
-                                    <div class="circle-text absolute inset-0 flex items-center justify-center text-accent-text text-lg font-bold">60%</div>
+                                    <div class="circle-text absolute inset-0 flex items-center justify-center text-accent-text text-lg font-bold">0%</div>
                                 </div>
                                 <p class="text-text-muted text-sm mt-2">Python Coding</p>
                             </div>
-                             <div class="skill-circle flex flex-col items-center">
+                             <div class="skill-circle flex flex-col items-center" data-aos="zoom-in-up" data-aos-delay="300">
                                 <div class="circle-progress-wrapper relative w-24 h-24" data-progress="75" data-color="var(--color-accent-6)">
                                     <canvas class="circle-canvas absolute top-0 left-0" width="96" height="96"></canvas>
-                                    <div class="circle-text absolute inset-0 flex items-center justify-center text-accent-text text-lg font-bold">75%</div>
+                                    <div class="circle-text absolute inset-0 flex items-center justify-center text-accent-text text-lg font-bold">0%</div>
                                 </div>
                                 <p class="text-text-muted text-sm mt-2">SPSS</p>
                             </div>
@@ -456,38 +522,38 @@
                     </div>
 
                      <!-- Technical Skills (Icons with enhanced hover) -->
-                    <div class="bg-dark-bg p-6 rounded-lg shadow-md border-l-4 border-earth-green animate-fade-in-up delay-200">
+                    <div class="p-6 rounded-lg shadow-md border-l-4 border-earth-green glass-card" data-aos="fade-left" data-aos-delay="300">
                         <h3 class="text-xl font-semibold text-accent-text mb-4">Technical Skills</h3>
                         <div class="grid grid-cols-2 gap-4">
-                            <div class="flex items-center space-x-2 text-text-muted skill-item hover:text-sky-blue transform hover:scale-105 transition-all duration-200">
+                            <div class="flex items-center space-x-2 text-text-muted skill-item hover:text-sky-blue transform hover:scale-105 transition-all duration-200" data-aos="fade-zoom-in" data-aos-delay="50">
                                 <i class="fas fa-database text-sky-blue"></i>
                                 <span>Data Collection</span>
                             </div>
-                            <div class="flex items-center space-x-2 text-text-muted skill-item hover:text-terra-brown transform hover:scale-105 transition-all duration-200">
+                            <div class="flex items-center space-x-2 text-text-muted skill-item hover:text-terra-brown transform hover:scale-105 transition-all duration-200" data-aos="fade-zoom-in" data-aos-delay="100">
                                 <i class="fas fa-ruler-combined text-terra-brown"></i>
                                 <span>Surveying</span>
                             </div>
-                            <div class="flex items-center space-x-2 text-text-muted skill-item hover:text-fresh-green transform hover:scale-105 transition-all duration-200">
+                            <div class="flex items-center space-x-2 text-text-muted skill-item hover:text-fresh-green transform hover:scale-105 transition-all duration-200" data-aos="fade-zoom-in" data-aos-delay="150">
                                 <i class="fas fa-map text-fresh-green"></i>
                                 <span>Spatial Data Analysis</span>
                             </div>
-                            <div class="flex items-center space-x-2 text-text-muted skill-item hover:text-deep-teal transform hover:scale-105 transition-all duration-200">
+                            <div class="flex items-center space-x-2 text-text-muted skill-item hover:text-deep-teal transform hover:scale-105 transition-all duration-200" data-aos="fade-zoom-in" data-aos-delay="200">
                                 <i class="fas fa-project-diagram text-deep-teal"></i>
                                 <span>Modelling</span>
                             </div>
-                            <div class="flex items-center space-x-2 text-text-muted skill-item hover:text-neutral-grey transform hover:scale-105 transition-all duration-200">
+                            <div class="flex items-center space-x-2 text-text-muted skill-item hover:text-neutral-grey transform hover:scale-105 transition-all duration-200" data-aos="fade-zoom-in" data-aos-delay="250">
                                 <i class="fas fa-file-invoice text-neutral-grey"></i>
                                 <span>Report Writing</span>
                             </div>
-                            <div class="flex items-center space-x-2 text-text-muted skill-item hover:text-earth-green transform hover:scale-105 transition-all duration-200">
+                            <div class="flex items-center space-x-2 text-text-muted skill-item hover:text-earth-green transform hover:scale-105 transition-all duration-200" data-aos="fade-zoom-in" data-aos-delay="300">
                                 <i class="fas fa-award text-earth-green"></i>
                                 <span>ISO 1400/14001</span>
                             </div>
-                             <div class="flex items-center space-x-2 text-text-muted skill-item hover:text-sky-blue transform hover:scale-105 transition-all duration-200">
+                             <div class="flex items-center space-x-2 text-text-muted skill-item hover:text-sky-blue transform hover:scale-105 transition-all duration-200" data-aos="fade-zoom-in" data-aos-delay="350">
                                 <i class="fas fa-brain text-sky-blue"></i>
                                 <span>Machine Learning</span>
                             </div>
-                             <div class="flex items-center space-x-2 text-text-muted skill-item hover:text-terra-brown transform hover:scale-105 transition-all duration-200">
+                             <div class="flex items-center space-x-2 text-text-muted skill-item hover:text-terra-brown transform hover:scale-105 transition-all duration-200" data-aos="fade-zoom-in" data-aos-delay="400">
                                 <i class="fas fa-satellite-dish text-terra-brown"></i>
                                 <span>Remote Sensing</span>
                             </div>
@@ -497,35 +563,35 @@
             </section>
 
             <!-- Career Achievements Section -->
-            <section id="career-achievements" class="mb-12 p-8 bg-dark-card rounded-lg shadow-xl animate-item">
+            <section id="career-achievements" class="mb-12 p-8 rounded-lg shadow-xl transition-colors duration-300 glass-card" data-aos="fade-up">
                 <h2 class="text-3xl font-bold text-fresh-green mb-6 border-b-2 border-deep-teal pb-3">Career Achievements</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-text-muted leading-relaxed">
                     <!-- Achievement Counter 1 -->
-                    <div class="achievement-card bg-dark-bg p-6 rounded-lg shadow-md border-b-4 border-accent-1 text-center animate-fade-in-up">
+                    <div class="achievement-card p-6 rounded-lg shadow-md border-b-4 border-accent-1 text-center glass-card" data-aos="flip-left" data-aos-delay="100">
                         <i class="fas fa-certificate text-accent-1 text-5xl mb-3"></i>
                         <div class="text-4xl font-bold text-accent-text mb-2 counter" data-target="1">0</div>
                         <p class="text-neutral-grey text-sm">ISO Approval</p>
                     </div>
                     <!-- Achievement Counter 2 -->
-                    <div class="achievement-card bg-dark-bg p-6 rounded-lg shadow-md border-b-4 border-accent-2 text-center animate-fade-in-up delay-100">
+                    <div class="achievement-card p-6 rounded-lg shadow-md border-b-4 border-accent-2 text-center glass-card" data-aos="flip-left" data-aos-delay="200">
                         <i class="fas fa-drafting-compass text-accent-2 text-5xl mb-3"></i>
                         <div class="text-4xl font-bold text-accent-text mb-2 counter" data-target="4">0</div>
                         <p class="text-neutral-grey text-sm">Key Surveying Projects</p>
                     </div>
                     <!-- Achievement Counter 3 -->
-                    <div class="achievement-card bg-dark-bg p-6 rounded-lg shadow-md border-b-4 border-accent-3 text-center animate-fade-in-up delay-200">
+                    <div class="achievement-card p-6 rounded-lg shadow-md border-b-4 border-accent-3 text-center glass-card" data-aos="flip-left" data-aos-delay="300">
                         <i class="fas fa-book text-accent-3 text-5xl mb-3"></i>
                         <div class="text-4xl font-bold text-accent-text mb-2 counter" data-target="1">0</div>
                         <p class="text-neutral-grey text-sm">Published Paper</p>
                     </div>
                     <!-- Achievement Counter 4 -->
-                    <div class="achievement-card bg-dark-bg p-6 rounded-lg shadow-md border-b-4 border-accent-4 text-center animate-fade-in-up delay-300">
+                    <div class="achievement-card p-6 rounded-lg shadow-md border-b-4 border-accent-4 text-center glass-card" data-aos="flip-left" data-aos-delay="400">
                         <i class="fas fa-cogs text-accent-4 text-5xl mb-3"></i>
                         <div class="text-4xl font-bold text-accent-text mb-2 counter" data-target="3">0</div>
                         <p class="text-neutral-grey text-sm">Proficient GIS Software</p>
                     </div>
                 </div>
-                 <div class="mt-8 text-text-muted leading-relaxed text-lg">
+                 <div class="mt-8 text-text-muted leading-relaxed text-lg" data-aos="fade-up" data-aos-delay="500">
                     <ul class="list-disc list-inside space-y-3">
                         <li>Core Team member responsible for the ISO approval and development of a vulnerability assessment plan of Muriel mine residents before its shut down.</li>
                         <li>Rookie Surveyor at Muriel Mine locating beacons and helping outline the mine claims.</li>
@@ -540,10 +606,10 @@
             </section>
 
             <!-- Publications Section -->
-            <section id="publications" class="mb-12 p-8 bg-dark-card rounded-lg shadow-xl animate-item">
+            <section id="publications" class="mb-12 p-8 rounded-lg shadow-xl transition-colors duration-300 glass-card" data-aos="fade-up">
                 <h2 class="text-3xl font-bold text-fresh-green mb-6 border-b-2 border-deep-teal pb-3">Publications</h2>
                 <div class="space-y-6">
-                    <div class="publication-item bg-dark-bg p-6 rounded-lg shadow-md border-l-4 border-sky-blue hover:bg-neutral-grey hover:bg-opacity-20 transition-colors duration-300 transform hover:-translate-y-1 animate-fade-in-up">
+                    <div class="publication-item p-6 rounded-lg shadow-md border-l-4 border-sky-blue hover:bg-neutral-grey hover:bg-opacity-20 transition-all duration-300 transform hover:-translate-y-1 glass-card" data-aos="zoom-in-right">
                         <h3 class="text-xl font-semibold text-accent-text mb-2">
                             <i class="fas fa-file-alt text-sky-blue mr-2"></i>Application of Change Detection Techniques Driven by Expert Opinions for Small-area Studies in Developing Countries.
                         </h3>
@@ -559,62 +625,64 @@
             </section>
 
             <!-- Research Interests Section -->
-            <section id="research-interests" class="mb-12 p-8 bg-dark-card rounded-lg shadow-xl animate-item">
+            <section id="research-interests" class="mb-12 p-8 rounded-lg shadow-xl transition-colors duration-300 glass-card" data-aos="fade-up">
                 <h2 class="text-3xl font-bold text-fresh-green mb-6 border-b-2 border-deep-teal pb-3">Research Interests</h2>
                 <div class="flex flex-wrap justify-center gap-4 py-4 research-tags">
-                    <span class="research-tag bg-sky-blue text-white px-4 py-2 rounded-full shadow-md text-sm animate-tag-pop" data-delay="0">GIS Hydrology</span>
-                    <span class="research-tag bg-terra-brown text-white px-4 py-2 rounded-full shadow-md text-sm animate-tag-pop" data-delay="100">Urban Planning</span>
-                    <span class="research-tag bg-deep-teal text-white px-4 py-2 rounded-full shadow-md text-sm animate-tag-pop" data-delay="200">Environmental Degradation</span>
-                    <span class="research-tag bg-fresh-green text-white px-4 py-2 rounded-full shadow-md text-sm animate-tag-pop" data-delay="300">Environmental Modelling</span>
-                    <span class="research-tag bg-neutral-grey text-white px-4 py-2 rounded-full shadow-md text-sm animate-tag-pop" data-delay="400">GIS Interoperability</span>
-                    <span class="research-tag bg-accent-1 text-dark-bg px-4 py-2 rounded-full shadow-md text-sm animate-tag-pop" data-delay="500">Indigenous Knowledge Systems</span>
-                    <span class="research-tag bg-accent-2 text-white px-4 py-2 rounded-full shadow-md text-sm animate-tag-pop" data-delay="600">Rural Development</span>
-                    <span class="research-tag bg-accent-3 text-white px-4 py-2 rounded-full shadow-md text-sm animate-tag-pop" data-delay="700">Water Management</span>
-                    <span class="research-tag bg-accent-4 text-white px-4 py-2 rounded-full shadow-md text-sm animate-tag-pop" data-delay="800">Climate Change</span>
-                    <span class="research-tag bg-accent-5 text-white px-4 py-2 rounded-full shadow-md text-sm animate-tag-pop" data-delay="900">Land-use Change</span>
-                    <span class="research-tag bg-accent-6 text-white px-4 py-2 rounded-full shadow-md text-sm animate-tag-pop" data-delay="1000">GIS in Mining</span>
+                    <span class="research-tag bg-sky-blue text-white px-4 py-2 rounded-full shadow-md text-sm transition-all duration-200 hover:shadow-lg hover:scale-105" data-aos="fade-up" data-aos-delay="50">GIS Hydrology</span>
+                    <span class="research-tag bg-terra-brown text-white px-4 py-2 rounded-full shadow-md text-sm transition-all duration-200 hover:shadow-lg hover:scale-105" data-aos="fade-up" data-aos-delay="100">Urban Planning</span>
+                    <span class="research-tag bg-deep-teal text-white px-4 py-2 rounded-full shadow-md text-sm transition-all duration-200 hover:shadow-lg hover:scale-105" data-aos="fade-up" data-aos-delay="150">Environmental Degradation</span>
+                    <span class="research-tag bg-fresh-green text-white px-4 py-2 rounded-full shadow-md text-sm transition-all duration-200 hover:shadow-lg hover:scale-105" data-aos="fade-up" data-aos-delay="200">Environmental Modelling</span>
+                    <span class="research-tag bg-neutral-grey text-white px-4 py-2 rounded-full shadow-md text-sm transition-all duration-200 hover:shadow-lg hover:scale-105" data-aos="fade-up" data-aos-delay="250">GIS Interoperability</span>
+                    <span class="research-tag bg-accent-1 text-dark-bg px-4 py-2 rounded-full shadow-md text-sm transition-all duration-200 hover:shadow-lg hover:scale-105" data-aos="fade-up" data-aos-delay="300">Indigenous Knowledge Systems</span>
+                    <span class="research-tag bg-accent-2 text-white px-4 py-2 rounded-full shadow-md text-sm transition-all duration-200 hover:shadow-lg hover:scale-105" data-aos="fade-up" data-aos-delay="350">Rural Development</span>
+                    <span class="research-tag bg-accent-3 text-white px-4 py-2 rounded-full shadow-md text-sm transition-all duration-200 hover:shadow-lg hover:scale-105" data-aos="fade-up" data-aos-delay="400">Water Management</span>
+                    <span class="research-tag bg-accent-4 text-white px-4 py-2 rounded-full shadow-md text-sm transition-all duration-200 hover:shadow-lg hover:scale-105" data-aos="fade-up" data-aos-delay="450">Climate Change</span>
+                    <span class="research-tag bg-accent-5 text-white px-4 py-2 rounded-full shadow-md text-sm transition-all duration-200 hover:shadow-lg hover:scale-105" data-aos="fade-up" data-aos-delay="500">Land-use Change</span>
+                    <span class="research-tag bg-accent-6 text-white px-4 py-2 rounded-full shadow-md text-sm transition-all duration-200 hover:shadow-lg hover:scale-105" data-aos="fade-up" data-aos-delay="550">GIS in Mining</span>
                 </div>
             </section>
 
             <!-- Contact Section -->
-            <section id="contact" class="mb-12 p-8 bg-dark-card rounded-lg shadow-xl animate-item">
+            <section id="contact" class="mb-12 p-8 rounded-lg shadow-xl transition-colors duration-300 glass-card" data-aos="fade-up">
                 <h2 class="text-3xl font-bold text-fresh-green mb-6 border-b-2 border-deep-teal pb-3">Contact</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-lg text-text-muted">
                     <div class="space-y-4">
-                        <p class="animate-fade-in-left">I am eager to connect and discuss how my skills can contribute to your organization. Please feel free to reach out:</p>
-                        <p class="flex items-center animate-fade-in-left delay-100 contact-item hover:text-sky-blue hover:translate-x-1 transition-all duration-200">
+                        <p data-aos="fade-right" data-aos-delay="100">I am eager to connect and discuss how my skills can contribute to your organization. Please feel free to reach out:</p>
+                        <p class="flex items-center contact-item hover:text-sky-blue hover:translate-x-1 transition-all duration-200" data-aos="fade-right" data-aos-delay="150">
                             <i class="fas fa-phone-alt w-6 h-6 mr-3 text-sky-blue"></i>
-                            Phone: <a href="https://wa.me/263775681612" target="_blank" rel="noopener noreferrer" class="text-accent-text hover:underline ml-2">+263 775 681 612 (WhatsApp)</a>
+                            Phone: <a href="https://wa.me/263775681612" target="_blank" rel="noopener noreferrer" class="text-accent-text hover:underline ml-2 button-micro-interaction">+263 775 681 612 (WhatsApp)</a>
                         </p>
-                        <p class="flex items-center animate-fade-in-left delay-200 contact-item hover:text-sky-blue hover:translate-x-1 transition-all duration-200">
+                        <p class="flex items-center contact-item hover:text-sky-blue hover:translate-x-1 transition-all duration-200" data-aos="fade-right" data-aos-delay="200">
                             <i class="fas fa-envelope w-6 h-6 mr-3 text-sky-blue"></i>
-                            Email: <a href="mailto:cartoscholar@gmail.com" class="text-sky-blue hover:underline ml-2">cartoscholar@gmail.com</a>
+                            Email: <a href="mailto:cartoscholar@gmail.com" class="text-sky-blue hover:underline ml-2 button-micro-interaction">cartoscholar@gmail.com</a>
                         </p>
-                        <p class="flex items-center animate-fade-in-left delay-300 contact-item hover:text-sky-blue hover:translate-x-1 transition-all duration-200">
+                        <p class="flex items-center contact-item hover:text-sky-blue hover:translate-x-1 transition-all duration-200" data-aos="fade-right" data-aos-delay="250">
                             <i class="fab fa-skype w-6 h-6 mr-3 text-sky-blue"></i>
                             Skype: <span class="text-accent-text ml-2">Tanakambendana</span>
                         </p>
                     </div>
                     <div class="space-y-4">
-                        <p class="flex items-center animate-fade-in-right delay-100 contact-item hover:text-sky-blue hover:translate-x-1 transition-all duration-200">
+                        <p class="flex items-center contact-item hover:text-sky-blue hover:translate-x-1 transition-all duration-200" data-aos="fade-left" data-aos-delay="150">
                             <i class="fas fa-map-marker-alt w-6 h-6 mr-3 text-sky-blue"></i>
                             Address: <span class="text-accent-text ml-2">4 7th Avenues, Sakubva Mutare, Zimbabwe</span>
                         </p>
-                        <p class="flex items-center animate-fade-in-right delay-200 contact-item hover:text-sky-blue hover:translate-x-1 transition-all duration-200">
+                        <p class="flex items-center contact-item hover:text-sky-blue hover:translate-x-1 transition-all duration-200" data-aos="fade-left" data-aos-delay="200">
                             <i class="fab fa-whatsapp w-6 h-6 mr-3 text-sky-blue"></i>
-                            WhatsApp Group: <a href="https://chat.whatsapp.com/Ll6BaOwSiXVCc1FItleyCs" target="_blank" rel="noopener noreferrer" class="text-sky-blue hover:underline ml-2">CartoScholar Community</a>
+                            WhatsApp Group: <a href="https://chat.whatsapp.com/Ll6BaOwSiXVCc1FItleyCs" target="_blank" rel="noopener noreferrer" class="text-sky-blue hover:underline ml-2 button-micro-interaction">CartoScholar Community</a>
                         </p>
-                        <p class="flex items-center animate-fade-in-right delay-300 contact-item hover:text-sky-blue hover:translate-x-1 transition-all duration-200">
+                        <p class="flex items-center contact-item hover:text-sky-blue hover:translate-x-1 transition-all duration-200" data-aos="fade-left" data-aos-delay="250">
                             <i class="fab fa-youtube w-6 h-6 mr-3 text-sky-blue"></i>
-                            YouTube Channel: <a href="https://www.youtube.com/@cartoscholar" target="_blank" rel="noopener noreferrer" class="text-sky-blue hover:underline ml-2">CartoScholar</a>
+                            YouTube Channel: <a href="https://www.youtube.com/@cartoscholar" target="_blank" rel="noopener noreferrer" class="text-sky-blue hover:underline ml-2 button-micro-interaction">CartoScholar</a>
                         </p>
                     </div>
                 </div>
-                <p class="mt-6 text-neutral-grey italic animate-fade-in-up delay-400">References available upon request.</p>
+                <p class="mt-6 text-neutral-grey italic" data-aos="fade-up" data-aos-delay="300">References available upon request.</p>
             </section>
         </main>
     </div>
 
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <!-- JavaScript for Animations -->
     <script src="script.js"></script>
 </body>
