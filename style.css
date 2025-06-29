@@ -1,98 +1,276 @@
 /* style.css */
 
-/* Custom properties for colors (optional, but good practice) */
-:root {
-    --primary-green: #10B981; /* Tailwind green-500 */
-    --dark-bg: #111827;      /* Tailwind gray-900 */
-    --dark-card: #1F2937;    /* Tailwind gray-800 */
-    --darker-card: #374151;  /* Tailwind gray-700 */
-    --light-text: #E5E7EB;   /* Tailwind gray-100 */
-    --light-gray: #9CA3AF;   /* Tailwind gray-400 */
-}
-
 body {
     font-family: 'Inter', sans-serif;
-    /* This background creates a subtle, animated gradient effect */
-    background: linear-gradient(135deg, var(--dark-bg), #0f172a, #111827);
-    background-size: 400% 400%;
-    animation: gradientAnimation 15s ease infinite;
+    transition: background-color 0.5s ease, color 0.5s ease; /* Smooth transition for theme change */
 }
 
-@keyframes gradientAnimation {
+/* Dark Mode Gradient Animation (Default) */
+html:not(.light) body {
+    background: linear-gradient(135deg, var(--color-dark-bg), #0f172a, #111827);
+    background-size: 400% 400%;
+    animation: gradientAnimationDark 20s ease infinite;
+}
+
+/* Light Mode Gradient Animation */
+html.light body {
+    background: linear-gradient(135deg, var(--color-light-bg), #e0e7ff, #d1d5db); /* Softer light gradient */
+    background-size: 400% 400%;
+    animation: gradientAnimationLight 20s ease infinite;
+}
+
+@keyframes gradientAnimationDark {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* Base styles for animations */
-.animate-item {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+@keyframes gradientAnimationLight {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-.animate-item.is-visible {
-    opacity: 1;
-    transform: translateY(0);
+/* Profile image hover effect - Using CSS variables defined in HTML for RGB */
+aside img {
+    box-shadow: 0 0 15px rgba(var(--color-fresh-green-rgb, 108, 187, 60), 0.5);
+}
+html.light aside img {
+     box-shadow: 0 0 15px rgba(var(--color-fresh-green-rgb, 108, 187, 60), 0.3);
 }
 
-/* Optional: Initial page fade-in effect */
-main {
-    opacity: 0;
-    animation: fadeInPage 1s ease-out forwards;
-}
-
-@keyframes fadeInPage {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* Profile image hover effect */
-.aside img {
-    box-shadow: 0 0 15px rgba(16, 185, 129, 0.5); /* Subtle glow */
-}
-
-/* Navigation link hover effect */
-.nav-link {
-    /* Transitions already handled by Tailwind classes in HTML */
-}
-
-/* Scrollbar styling (optional, for better aesthetics on webkit browsers) */
+/* Scrollbar styling */
+/* Dark Mode Scrollbar */
 ::-webkit-scrollbar {
     width: 10px;
 }
-
 ::-webkit-scrollbar-track {
-    background: var(--dark-bg);
+    background: var(--color-dark-card); /* Use card color for track */
     border-radius: 10px;
 }
-
 ::-webkit-scrollbar-thumb {
-    background: var(--primary-green);
+    background: var(--color-fresh-green);
     border-radius: 10px;
+    border: 2px solid var(--color-dark-card); /* Creates a nice border effect */
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-earth-green);
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: #0d9263; /* A slightly darker green on hover */
+/* Light Mode Scrollbar */
+html.light ::-webkit-scrollbar-track {
+    background: var(--color-light-card); /* Use light card color */
 }
+html.light ::-webkit-scrollbar-thumb {
+    background: var(--color-deep-teal);
+    border: 2px solid var(--color-light-card);
+}
+html.light ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-sky-blue);
+}
+
 
 /* Adjust padding/margin for smaller screens */
 @media (max-width: 1023px) {
-    .lg\:w-1\/4 {
-        width: 100%; /* Sidebar takes full width on small screens */
-        padding: 2rem;
-        border-radius: 0.5rem; /* Rounded corners for overall card effect */
-        margin-bottom: 2rem;
+    .lg\:w-1\/4 { /* Sidebar */
+        width: 100%;
+        padding: 1.5rem; /* Slightly reduce padding on mobile */
+        border-radius: 0.5rem;
+        margin-bottom: 1.5rem;
     }
 
     .lg\:items-start {
-        align-items: center; /* Center items in sidebar on small screens */
+        align-items: center;
     }
-
+    /* Ensure sidebar corners are consistent on mobile when stacked */
     .lg\:rounded-bl-none {
-        border-bottom-left-radius: 0.5rem; /* Re-apply border-radius for consistency */
+        border-bottom-left-radius: 0.5rem;
     }
     .lg\:rounded-tr-none {
         border-top-right-radius: 0.5rem;
     }
+
+    main.lg\:p-12 { /* Main content padding */
+        padding: 1.5rem;
+    }
+
+    section.p-8 { /* Section padding */
+        padding: 1.5rem;
+    }
+    .text-4xl.lg\:text-5xl { /* Hero title */
+        font-size: 2.5rem; /* Adjust hero title size for mobile */
+    }
+    .text-xl.lg\:text-2xl { /* Hero subtitle */
+        font-size: 1.25rem;
+    }
 }
+
+/* Glassmorphism Card Style */
+.glass-card {
+    background: rgba(31, 41, 55, 0.6); /* var(--color-dark-card) with opacity */
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease, border 0.3s ease, box-shadow 0.3s ease;
+}
+
+html.light .glass-card {
+    background: rgba(255, 255, 255, 0.65); /* var(--color-light-card) with opacity */
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(209, 213, 219, 0.3); /* light grey border */
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+}
+
+/* Add this to your :root style block in index.html to define the RGB color */
+/*
+:root {
+    --color-fresh-green-rgb: 108, 187, 60;
+}
+*/
+
+/* Ensure specific elements like timeline dots and lines adapt to themes */
+html.light .timeline-line {
+    background-color: var(--color-neutral-grey); /* Example: darker grey for light theme line */
+}
+
+html.light .timeline-dot {
+    border-color: var(--color-light-bg) !important; /* Important to override inline styles if any */
+}
+html.light .timeline-dot i {
+    color: var(--color-light-bg) !important;
+}
+
+/* Project card hover effect enhancement */
+.project-card {
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+.project-card:hover {
+    box-shadow: 0 10px 15px -3px rgba(var(--color-sky-blue-rgb, 135, 206, 235), 0.2), 0 4px 6px -4px rgba(var(--color-sky-blue-rgb, 135, 206, 235), 0.1);
+    /* Define --color-sky-blue-rgb in :root or use direct rgba values */
+}
+html.light .project-card:hover {
+    box-shadow: 0 10px 15px -3px rgba(var(--color-deep-teal-rgb, 0, 128, 128), 0.2), 0 4px 6px -4px rgba(var(--color-deep-teal-rgb, 0, 128, 128), 0.1);
+}
+
+/* Skill item hover in light mode */
+html.light .skill-item:hover {
+    /* color: var(--color-deep-teal); Tailwind handles this, ensure text-deep-teal is defined for light text */
+}
+html.light .skill-item:hover i {
+    /* color: inherit; */ /* Or specific color */
+}
+
+/* Ensure research tags have good contrast in light mode */
+html.light .research-tag {
+    /* Example: if a tag has bg-accent-1 (Gold), and light text is black, it might be fine. */
+    /* If default text is light, you might need to adjust specific tag text colors in light mode */
+}
+html.light .research-tag.bg-accent-1 { /* Example for Gold tag */
+    color: var(--color-dark-bg); /* Dark text on gold bg for light mode */
+}
+
+/* Add RGB versions of colors to :root in index.html for box-shadows with opacity */
+/*
+:root {
+    --color-fresh-green-rgb: 108, 187, 60;
+    --color-sky-blue-rgb: 135, 206, 235;
+    --color-deep-teal-rgb: 0, 128, 128;
+}
+*/
+
+/* Micro-interactions for buttons and links */
+.button-micro-interaction {
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, color 0.2s ease-out;
+}
+.button-micro-interaction:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Softer shadow for general buttons */
+}
+
+/* Specific button style enhancements */
+.bg-fresh-green.hover\:bg-earth-green:hover { /* Download CV Button */
+    box-shadow: 0 6px 20px rgba(var(--color-fresh-green-rgb, 108, 187, 60), 0.3);
+}
+html.light .bg-fresh-green.hover\:bg-earth-green:hover {
+    box-shadow: 0 6px 20px rgba(var(--color-fresh-green-rgb, 108, 187, 60), 0.2);
+}
+
+
+.bg-sky-blue.hover\:bg-deep-teal:hover { /* View Work Button */
+    box-shadow: 0 6px 20px rgba(var(--color-sky-blue-rgb, 135, 206, 235), 0.3);
+}
+html.light .bg-sky-blue.hover\:bg-deep-teal:hover {
+     box-shadow: 0 6px 20px rgba(var(--color-sky-blue-rgb, 135, 206, 235), 0.2);
+}
+
+.border-fresh-green.text-fresh-green:hover { /* Contact Me Button */
+    box-shadow: 0 6px 20px rgba(var(--color-fresh-green-rgb, 108, 187, 60), 0.25);
+}
+html.light .border-fresh-green.text-fresh-green:hover {
+    box-shadow: 0 6px 20px rgba(var(--color-fresh-green-rgb, 108, 187, 60), 0.15);
+}
+
+
+#darkModeToggle:hover {
+    box-shadow: 0 0 15px rgba(var(--color-deep-teal-rgb, 0, 128, 128), 0.4);
+}
+html.light #darkModeToggle:hover {
+    box-shadow: 0 0 15px rgba(var(--color-deep-teal-rgb, 0, 128, 128), 0.25);
+}
+
+/* Parallax effect for hero background */
+#hero {
+    overflow: hidden; /* Keep pseudo-elements contained */
+}
+#parallax-bg-hero {
+    transition: transform 0.1s ease-out; /* Smooth parallax movement */
+    background-image: url('https://source.unsplash.com/random/1600x900/?abstract,nature,technology'); /* Placeholder parallax image */
+    background-size: cover;
+    background-position: center;
+    opacity: 0.15; /* Further reduced opacity */
+}
+
+html.light #parallax-bg-hero {
+    opacity: 0.25; /* Slightly more visible in light mode */
+}
+
+/* Portfolio Item Styling */
+.portfolio-item {
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+.portfolio-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(var(--color-sky-blue-rgb, 135, 206, 235), 0.15); /* Using existing color variable for consistency */
+}
+html.light .portfolio-item:hover {
+    box-shadow: 0 12px 24px rgba(var(--color-deep-teal-rgb, 0, 128, 128), 0.15);
+}
+
+/* Testimonial Card Styling */
+.testimonial-card {
+    position: relative;
+    padding-top: 2.5rem; /* Space for the quote icon based on p-4 card padding */
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+.testimonial-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(var(--color-accent-3-rgb, 147, 112, 219), 0.15); /* Using a new accent color for variety if defined, or fallback */
+}
+html.light .testimonial-card:hover {
+    box-shadow: 0 10px 20px rgba(var(--color-accent-3-rgb, 147, 112, 219), 0.1);
+}
+.testimonial-quote-icon {
+    position: absolute;
+    top: 1rem;  /* Corresponds to p-4 */
+    left: 1rem; /* Corresponds to p-4 */
+    opacity: 0.15;
+    font-size: 2rem; /* Slightly larger quote icon */
+}
+html.light .testimonial-quote-icon {
+    opacity: 0.1;
+}
+
+/* Ensure --color-accent-3-rgb is defined in :root in index.html if used, e.g. --color-accent-3-rgb: 147, 112, 219; */
