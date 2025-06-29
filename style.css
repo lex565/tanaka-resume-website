@@ -236,3 +236,41 @@ html.light #darkModeToggle:hover {
 html.light #parallax-bg-hero {
     opacity: 0.25; /* Slightly more visible in light mode */
 }
+
+/* Portfolio Item Styling */
+.portfolio-item {
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+.portfolio-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(var(--color-sky-blue-rgb, 135, 206, 235), 0.15); /* Using existing color variable for consistency */
+}
+html.light .portfolio-item:hover {
+    box-shadow: 0 12px 24px rgba(var(--color-deep-teal-rgb, 0, 128, 128), 0.15);
+}
+
+/* Testimonial Card Styling */
+.testimonial-card {
+    position: relative;
+    padding-top: 2.5rem; /* Space for the quote icon based on p-4 card padding */
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+.testimonial-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(var(--color-accent-3-rgb, 147, 112, 219), 0.15); /* Using a new accent color for variety if defined, or fallback */
+}
+html.light .testimonial-card:hover {
+    box-shadow: 0 10px 20px rgba(var(--color-accent-3-rgb, 147, 112, 219), 0.1);
+}
+.testimonial-quote-icon {
+    position: absolute;
+    top: 1rem;  /* Corresponds to p-4 */
+    left: 1rem; /* Corresponds to p-4 */
+    opacity: 0.15;
+    font-size: 2rem; /* Slightly larger quote icon */
+}
+html.light .testimonial-quote-icon {
+    opacity: 0.1;
+}
+
+/* Ensure --color-accent-3-rgb is defined in :root in index.html if used, e.g. --color-accent-3-rgb: 147, 112, 219; */
