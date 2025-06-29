@@ -133,7 +133,7 @@
                 <h1 class="text-3xl font-bold text-accent-text mb-2 animate-fade-in-left">Tanaka Alex Mbendana</h1>
                 <p class="text-lg text-neutral-grey animate-fade-in-right">Environmentalist | Geo-informatician</p>
             </div>
-            <nav class="w-full">
+            <nav class="w-full mb-6"> {/* Added mb-6 to nav for spacing before new content */}
                 <ul class="space-y-3">
                     <li><a href="#about" class="nav-link flex items-center p-2.5 rounded-lg text-text-muted hover:bg-deep-teal hover:text-text-light transition duration-300 transform hover:translate-x-1 animate-fade-in-left delay-100">
                         <i class="fas fa-user-circle w-5 h-5 mr-2"></i> About Me</a></li>
@@ -141,20 +141,65 @@
                         <i class="fas fa-briefcase w-5 h-5 mr-2"></i> Work Experience</a></li>
                     <li><a href="#education" class="nav-link flex items-center p-2.5 rounded-lg text-text-muted hover:bg-deep-teal hover:text-text-light transition duration-300 transform hover:translate-x-1 animate-fade-in-left delay-300">
                         <i class="fas fa-graduation-cap w-5 h-5 mr-2"></i> Education</a></li>
+                    <li><a href="#my-cartographic-work" class="nav-link flex items-center p-2.5 rounded-lg text-text-muted hover:bg-deep-teal hover:text-text-light transition duration-300 transform hover:translate-x-1 animate-fade-in-left delay-350">
+                        <i class="fas fa-map-marked-alt w-5 h-5 mr-2"></i> Cartographic Work</a></li> {/* New Nav Link */}
                     <li><a href="#my-work" class="nav-link flex items-center p-2.5 rounded-lg text-text-muted hover:bg-deep-teal hover:text-text-light transition duration-300 transform hover:translate-x-1 animate-fade-in-left delay-400">
-                        <i class="fas fa-project-diagram w-5 h-5 mr-2"></i> My Work & Projects</a></li>
+                        <i class="fas fa-project-diagram w-5 h-5 mr-2"></i> Other Projects</a></li>
                     <li><a href="#skills" class="nav-link flex items-center p-2.5 rounded-lg text-text-muted hover:bg-deep-teal hover:text-text-light transition duration-300 transform hover:translate-x-1 animate-fade-in-left delay-500">
                         <i class="fas fa-cogs w-5 h-5 mr-2"></i> Skills</a></li>
                     <li><a href="#career-achievements" class="nav-link flex items-center p-2.5 rounded-lg text-text-muted hover:bg-deep-teal hover:text-text-light transition duration-300 transform hover:translate-x-1 animate-fade-in-left delay-600">
                         <i class="fas fa-trophy w-5 h-5 mr-2"></i> Achievements</a></li>
                     <li><a href="#publications" class="nav-link flex items-center p-2.5 rounded-lg text-text-muted hover:bg-deep-teal hover:text-text-light transition duration-300 transform hover:translate-x-1 animate-fade-in-left delay-700">
                         <i class="fas fa-book-open w-5 h-5 mr-2"></i> Publications</a></li>
+                    <li><a href="#testimonials" class="nav-link flex items-center p-2.5 rounded-lg text-text-muted hover:bg-deep-teal hover:text-text-light transition duration-300 transform hover:translate-x-1 animate-fade-in-left delay-750">
+                        <i class="fas fa-comments w-5 h-5 mr-2"></i> Testimonials</a></li> {/* New Nav Link */}
                     <li><a href="#research-interests" class="nav-link flex items-center p-2.5 rounded-lg text-text-muted hover:bg-deep-teal hover:text-text-light transition duration-300 transform hover:translate-x-1 animate-fade-in-left delay-800">
                         <i class="fas fa-flask w-5 h-5 mr-2"></i> Research Interests</a></li>
                     <li><a href="#contact" class="nav-link flex items-center p-2.5 rounded-lg text-text-muted hover:bg-deep-teal hover:text-text-light transition duration-300 transform hover:translate-x-1 animate-fade-in-left delay-900">
                         <i class="fas fa-envelope w-5 h-5 mr-2"></i> Contact</a></li>
                 </ul>
             </nav>
+
+            <!-- New Sidebar Content Sections -->
+            <div class="space-y-4 text-sm text-text-muted mb-6 overflow-y-auto" style="max-height: calc(100vh - 450px);"> {/* Added max-height and overflow for scrollability */}
+
+                <div class="sidebar-section">
+                    <h4 class="text-md font-semibold text-accent-text mb-1.5 flex items-center"><i class="fas fa-compass-drafting w-4 h-4 mr-2 text-fresh-green"></i>My Professional Philosophy</h4>
+                    <p class="text-xs leading-relaxed">"I believe the best environmental solutions are found where data meets dedication, and where a GIS map can tell a thousand stories (especially if those stories involve a cleaner planet). My guiding principle? To make sure our Earth is as well-mapped and cared for as my morning coffee routine. Seriously, though, it's about blending cutting-edge geospatial tech with genuine environmental stewardship for a truly positive impact."</p>
+                </div>
+
+                <div class="sidebar-section">
+                    <h4 class="text-md font-semibold text-accent-text mb-1.5 flex items-center"><i class="fas fa-rocket w-4 h-4 mr-2 text-fresh-green"></i>Future Aspirations</h4>
+                    <p class="text-xs leading-relaxed">"In the next five years, I aim to be the person who not only points out environmental challenges on a map but also spearheads the solutions—ideally, while still discovering new, obscure GIS software shortcuts. I'm keen to dive deeper into how AI and machine learning can supercharge our environmental modeling, perhaps even predicting where the next rogue beacon will appear at a mine before it goes missing. Ultimately, I want to contribute to sustainable development initiatives that make a tangible difference, one georeferenced pixel at a time."</p>
+                </div>
+
+                <div class="sidebar-section">
+                    <h4 class="text-md font-semibold text-accent-text mb-1.5 flex items-center"><i class="fas fa-palette w-4 h-4 mr-2 text-fresh-green"></i>Hobbies & Interests</h4>
+                    <ul class="list-none space-y-1 text-xs leading-relaxed">
+                        <li class="flex items-start"><i class="fas fa-coffee w-3 h-3 mr-1.5 mt-1 text-sky-blue"></i><span>**Brewing up Research:** Expanding my academic work, because there's always more to learn.</span></li>
+                        <li class="flex items-start"><i class="fas fa-compass w-3 h-3 mr-1.5 mt-1 text-sky-blue"></i><span>**Charting New Courses:** Running CartoScholar, my tutoring and mapping services. Think of me as a GPS for academic success.</span></li>
+                        <li class="flex items-start"><i class="fab fa-youtube w-3 h-3 mr-1.5 mt-1 text-sky-blue"></i><span>**YouTube Explorer:** Hosting my CartoScholar channel, sharing tips. A digital compass for personal growth!</span></li>
+                        <li class="flex items-start"><i class="fas fa-coins w-3 h-3 mr-1.5 mt-1 text-sky-blue"></i><span>**Digital Gold Miner:** Dabbling in affiliate marketing. Strategic mapping with different 'territories'!</span></li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-section">
+                    <h4 class="text-md font-semibold text-accent-text mb-1.5 flex items-center"><i class="fas fa-lightbulb w-4 h-4 mr-2 text-fresh-green"></i>Fun Fact / Unique Skill</h4>
+                    <p class="text-xs leading-relaxed">"Did you know I can identify over 50 tree species just by their leaf shape? Handy in the field, or for impromptu arboreal trivia! Also, I've mastered making complex GIS data look surprisingly elegant—some might say 'humorous' in its simplicity."</p>
+                </div>
+
+                <div class="sidebar-section">
+                    <h4 class="text-md font-semibold text-accent-text mb-1.5 flex items-center"><i class="fas fa-tools w-4 h-4 mr-2 text-fresh-green"></i>Tools & Technologies I'm Excited About</h4>
+                    <p class="text-xs leading-relaxed mb-1">Proficient with: AutoCAD, Data Mine, Leica GS18, GIS/Remote Sensing Software, MS Office.</p>
+                    <ul class="list-none space-y-0.5 text-xs leading-relaxed">
+                        <li class="flex items-start"><i class="fas fa-brain w-3 h-3 mr-1.5 mt-0.5 text-sky-blue"></i><span>**Machine Learning & AI:** For smarter environmental models.</span></li>
+                        <li class="flex items-start"><i class="fab fa-google w-3 h-3 mr-1.5 mt-0.5 text-sky-blue"></i><span>**Google Earth Engine:** Turning satellite data into actionable insights.</span></li>
+                        <li class="flex items-start"><i class="fas fa-chart-bar w-3 h-3 mr-1.5 mt-0.5 text-sky-blue"></i><span>**Advanced Data Visualization:** Making data weep tears of cartographic joy.</span></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- End New Sidebar Content Sections -->
+
             <div class="mt-6 w-full text-center lg:text-left">
                 <a href="Tanaka Mbendana CV.docx" download class="inline-flex items-center justify-center bg-fresh-green hover:bg-earth-green text-white font-bold py-2.5 px-5 rounded-lg shadow-md transition duration-300 transform hover:-translate-y-1 hover:scale-105 animate-fade-in-up">
                     <i class="fas fa-download w-4 h-4 mr-2"></i> Download CV</a>
@@ -287,9 +332,43 @@
                 </div>
             </section>
 
-            <!-- My Work & Projects Section -->
+            <!-- My Cartographic Work Section -->
+            <section id="my-cartographic-work" class="mb-8 p-6 rounded-lg shadow-xl transition-colors duration-300 glass-card" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-fresh-green mb-4 border-b-2 border-deep-teal pb-2">My Cartographic Work</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Portfolio Item 1 -->
+                    <div class="portfolio-item glass-card rounded-lg overflow-hidden shadow-lg" data-aos="fade-up-right">
+                        <img src="https://placehold.co/600x400/008080/FFFFFF?text=Map+Thumbnail+1" alt="Urban Expansion Study Map" class="w-full h-40 object-cover">
+                        <div class="p-4">
+                            <h3 class="text-md font-semibold text-accent-text mb-1">Urban Expansion Study</h3>
+                            <p class="text-xs text-text-muted mb-2">Analysis of urban growth patterns in Mutare from 2000-2020 using satellite imagery.</p>
+                            <a href="#" class="inline-block bg-sky-blue text-white text-xs font-semibold px-3 py-1.5 rounded-md hover:bg-deep-teal transition-colors button-micro-interaction">View Details</a>
+                        </div>
+                    </div>
+                    <!-- Portfolio Item 2 -->
+                    <div class="portfolio-item glass-card rounded-lg overflow-hidden shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                        <img src="https://placehold.co/600x400/4CAF50/FFFFFF?text=Map+Thumbnail+2" alt="Watershed Analysis Map" class="w-full h-40 object-cover">
+                        <div class="p-4">
+                            <h3 class="text-md font-semibold text-accent-text mb-1">Watershed Delineation</h3>
+                            <p class="text-xs text-text-muted mb-2">Hydrological modeling to delineate critical watersheds for water resource management.</p>
+                            <a href="#" class="inline-block bg-sky-blue text-white text-xs font-semibold px-3 py-1.5 rounded-md hover:bg-deep-teal transition-colors button-micro-interaction">View Details</a>
+                        </div>
+                    </div>
+                    <!-- Portfolio Item 3 -->
+                    <div class="portfolio-item glass-card rounded-lg overflow-hidden shadow-lg" data-aos="fade-up-left" data-aos-delay="200">
+                        <img src="https://placehold.co/600x400/8B4513/FFFFFF?text=Map+Thumbnail+3" alt="Environmental Impact Map" class="w-full h-40 object-cover">
+                        <div class="p-4">
+                            <h3 class="text-md font-semibold text-accent-text mb-1">EIA Support Mapping</h3>
+                            <p class="text-xs text-text-muted mb-2">Geospatial support for an Environmental Impact Assessment of a proposed mining project.</p>
+                            <a href="#" class="inline-block bg-sky-blue text-white text-xs font-semibold px-3 py-1.5 rounded-md hover:bg-deep-teal transition-colors button-micro-interaction">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- My Work & Projects Section (Other Projects) -->
             <section id="my-work" class="mb-8 p-6 rounded-lg shadow-xl transition-colors duration-300 glass-card" data-aos="fade-up">
-                <h2 class="text-3xl font-bold text-fresh-green mb-4 border-b-2 border-deep-teal pb-2">My Work & Projects</h2>
+                <h2 class="text-3xl font-bold text-fresh-green mb-4 border-b-2 border-deep-teal pb-2">Other Ventures & Projects</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div class="project-card p-4 rounded-lg shadow-lg border-t-4 border-sky-blue transform hover:scale-105 transition-transform duration-300 glass-card" data-aos="fade-up-right">
                         <div class="text-sky-blue text-4xl mb-3 text-center"><i class="fas fa-globe-americas"></i></div>
@@ -330,8 +409,6 @@
             <section id="education" class="mb-8 p-6 rounded-lg shadow-xl transition-colors duration-300 glass-card" data-aos="fade-up">
                 <h2 class="text-3xl font-bold text-fresh-green mb-4 border-b-2 border-deep-teal pb-2">Education</h2>
                 <div class="space-y-6">
-
-                    {/* Education Item 1 */}
                     <div class="education-item p-4 rounded-lg shadow-md glass-card border-l-4 border-sky-blue" data-aos="fade-left" data-aos-delay="100">
                         <div class="flex flex-col md:flex-row items-start md:items-center">
                             <div class="flex-shrink-0 mb-3 md:mb-0 md:mr-4 text-center md:text-left">
@@ -348,8 +425,6 @@
                             </div>
                         </div>
                     </div>
-
-                    {/* Education Item 2 */}
                     <div class="education-item p-4 rounded-lg shadow-md glass-card border-l-4 border-terra-brown" data-aos="fade-right" data-aos-delay="200">
                         <div class="flex flex-col md:flex-row items-start md:items-center">
                             <div class="flex-shrink-0 mb-3 md:mb-0 md:mr-4 text-center md:text-left">
@@ -365,8 +440,6 @@
                             </div>
                         </div>
                     </div>
-
-                    {/* Education Item 3 */}
                     <div class="education-item p-4 rounded-lg shadow-md glass-card border-l-4 border-earth-green" data-aos="fade-left" data-aos-delay="300">
                         <div class="flex flex-col md:flex-row items-start md:items-center">
                             <div class="flex-shrink-0 mb-3 md:mb-0 md:mr-4 text-center md:text-left">
@@ -523,6 +596,37 @@
                             Mbendana, T.A., Gumbo, A.D., Jombo, S., Mugari, E. and Kapangaziwiri, E. (2025). *Scientific African*, p.e02594.</p>
                         <a href="https://doi.org/10.1016/j.sciaf.2025.e02594" target="_blank" rel="noopener noreferrer" class="text-sky-blue hover:underline text-xs font-semibold flex items-center">
                             View Publication <i class="fas fa-external-link-alt text-xs ml-1.5"></i></a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonials Section -->
+            <section id="testimonials" class="mb-8 p-6 rounded-lg shadow-xl transition-colors duration-300 glass-card" data-aos="fade-up">
+                <h2 class="text-3xl font-bold text-fresh-green mb-4 border-b-2 border-deep-teal pb-2">Words from Colleagues & Clients</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card p-4 glass-card rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                        <div class="testimonial-quote-icon text-fresh-green"><i class="fas fa-quote-left"></i></div>
+                        <blockquote class="text-text-muted text-sm italic mb-3">
+                            "Tanaka's dedication to geospatial analysis is truly inspiring. The insights brought to our environmental projects were invaluable and presented with such clarity!"
+                        </blockquote>
+                        <figcaption class="text-xs text-accent-text font-semibold text-right">- Dr. Enviro Science, Lead Researcher</figcaption>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card p-4 glass-card rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                        <div class="testimonial-quote-icon text-fresh-green"><i class="fas fa-quote-left"></i></div>
+                        <blockquote class="text-text-muted text-sm italic mb-3">
+                            "Working with Tanaka on the ISO 14001 implementation was a breeze. Professional, knowledgeable, and always ready to explain complex GIS concepts."
+                        </blockquote>
+                        <figcaption class="text-xs text-accent-text font-semibold text-right">- Mine Safety Officer, Muriel Mine</figcaption>
+                    </div>
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-card p-4 glass-card rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="300">
+                        <div class="testimonial-quote-icon text-fresh-green"><i class="fas fa-quote-left"></i></div>
+                        <blockquote class="text-text-muted text-sm italic mb-3">
+                            "The mapping services provided by CartoScholar for our community project were top-notch. Clear, accurate, and delivered on time. Highly recommend!"
+                        </blockquote>
+                        <figcaption class="text-xs text-accent-text font-semibold text-right">- Local Community Leader</figcaption>
                     </div>
                 </div>
             </section>
